@@ -17,7 +17,13 @@ Checkpoints:
 - Practice with VPC and subnetting to control access
 - Setup EC2 autoscaling and EBL such that a VM will always exist and route traffic between VMs
 - Create a DynamoDB table to load and retrieve data, then do this with a script
-- Take advantage of Elastic Beanstalk to host the web application
+- Amazon Lightsail to host the website
 - Write a AWS Lambda function that emails you of changes to the DB
-
+- Cost analysis! At each step, take note of operations / uptime costs
 Helpful link: https://www.reddit.com/r/sysadmin/comments/8inzn5/so_you_want_to_learn_aws_aka_how_do_i_learn_to_be/
+
+Application:
+- Database of past and current cohort members
+- Schema: name, cohort #, technical track, contact information (email, Linkedin), current location / assignment
+- Queries can be used to search for cohort members or update them
+
