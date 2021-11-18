@@ -15,3 +15,5 @@ Timeline:
 - Create web application and store data in excel
 - Create cloud server to host and store data in database
 - Explore administrative tools to modify access control and gain better understanding of cloud computing
+
+Helpful link: https://www.reddit.com/r/sysadmin/comments/8inzn5/so_you_want_to_learn_aws_aka_how_do_i_learn_to_be/
