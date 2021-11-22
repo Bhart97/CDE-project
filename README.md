@@ -1,29 +1,47 @@
 # CDE-project
 Project name: CDE Project
 
-Description: Create a basic web server that will host information about the CareerPath program such as resources and cohort members. To be used as an online resource for current/past CareerPath Analysts.
+Description: Project to demostrate understanding of cloud engineering by hosting a web application on the cloud. Components include: cloud computing, storage and database management, virtual networks, security, and cost analysis. 
+
+Scope: Project will be completed using free tier / low-cost services on AWS and will leverage open-source programs (Git, etc.) to complete this project. No additional resources will be required and assumes that the student has completed previous training. Basic knowledge of command-line tools, Python, and SQL.
 
 Goals: 
-- Implement the skills learned from technical track (cloud engineering track) and to create functional online resource.
-- Create and design a project using only command line tools (whenever possible)
-- Incorporate as many topics from cloud computing (VM, VPNs and subnets, RBAC, database management, serverless functions, load balancers, etc.)
-- Use diagnostic analytics tools to monitor server health and costs
-- Use DevOps and Agile methods to practice deploying applications and how to deliver a product
+- Create and successfully run a program
+- Launch and configure EC2 instance and MySQL database.
+- Create a VPC that allows communication between two subnets.
+- Host and connect to a web application from the public IP address.
+- Diagnose and analyze the metrics of running applications on the cloud.
+- Use serverless functions to automatically notify of changes to the application.
 
-Checkpoints:
-- Create administrative account and setup the configurations / notifications
-- Design a webpage application that can be ran locally first
-- Deploy a VM that can host the webpage and can be accessed through external IP address
-- Practice with VPC and subnetting to control access
-- Setup EC2 autoscaling and EBL such that a VM will always exist and route traffic between VMs
-- Create a DynamoDB table to load and retrieve data, then do this with a script
-- Amazon Lightsail to host the website
-- Write a AWS Lambda function that emails you of changes to the DB
-- Cost analysis! At each step, take note of operations / uptime costs
-Helpful link: https://www.reddit.com/r/sysadmin/comments/8inzn5/so_you_want_to_learn_aws_aka_how_do_i_learn_to_be/
+Instruction:
 
-Application:
-- Database of past and current cohort members
-- Schema: name, cohort #, technical track, contact information (email, Linkedin), current location / assignment
-- Queries can be used to search for cohort members or update them
+Introduction - Hello, World!:
+- In this section, you will create a simple Python script that will ask for your name and says hello back.
+1a. (Option a) Open a session on your prefer Linux terminal and select any directory. Create a new directory called "CDE-project" (hint: "makedir <dir_name>") and then run the following command in /CDE-project: "git init". This will create an empty Git repository where all your documents will be stored. Create a new python file called "hello.py".
+
+1b. (Option b) Install Git Bash. Git Bash is solution for students how do not readily have Linux to access git commands. 
+
+2. Create a new Python file called "hello.py" (hint: "touch <file_name.py>) and use your favorite text editor to open it. Create a script that will ask for your name, receive an input, and then prints "Hello, <name>".
+
+3. Run your program! (Option a) run "python3 hello.py" through the Linux terminal OR (Option b) run "python hello.py" through command prompt (hint: if your code does not run, make sure it is in your PATH).
+
+4. Through either the Linux / Git terminal, run the command "git add hello.py" which will prepare your repo for its first commit. Followed by command git commit -m "My first commit". This will create a local copy of the changes that you have made. The command "git push origin" will save these changes and will reflected on the primary branch. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Credits: "So, you want to learn AWS? AKA, "How do I learn to be a Cloud Engineer?" by u/SpectralCoding
 
