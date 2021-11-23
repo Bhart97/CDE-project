@@ -1,11 +1,11 @@
 # CDE-project
-Project name: CDE Project
+## Project name: CDE Project
 
-Description: Project to demostrate understanding of cloud engineering by hosting a web application on the cloud. Components include: cloud computing, storage and database management, virtual networks, security, and cost analysis. 
+**Description**: Project to demostrate understanding of cloud engineering by hosting a [web application] on the cloud. Components include: cloud computing, storage and database management, virtual networks, security, and cost analysis. 
 
-Scope: Project will be completed using free tier / low-cost services on AWS and will leverage open-source programs (Git, etc.) to complete this project. No additional resources will be required and assumes that the student has completed previous training. Basic knowledge of command-line tools, Python, and SQL.
+**Scope**: Project will be completed using free tier / low-cost services on AWS and will leverage open-source programs (Git, etc.) to complete this project. Assumes basic knowledge from technical track including command-line tools, Python, and SQL.
 
-Goals: 
+**Goals**: 
 - Create and successfully run a program
 - Launch and configure EC2 instance and MySQL database.
 - Create a VPC that allows communication between two subnets.
@@ -13,13 +13,18 @@ Goals:
 - Diagnose and analyze the metrics of running applications on the cloud.
 - Use serverless functions to automatically notify of changes to the application.
 
-Instruction:
+## Instruction
 
-Introduction - Hello, World!:
+**Introduction - Hello, World!:**
 - In this section, you will create a simple Python script that will ask for your name and says hello back.
-1a. (Option a) Open a session on your prefer Linux terminal and select any directory. Create a new directory called "CDE-project" (hint: "makedir <dir_name>") and then run the following command in /CDE-project: "git init". This will create an empty Git repository where all your documents will be stored. Create a new python file called "hello.py".
+1.
+- (Option a) Open a session on your prefer Linux terminal and select any directory. Create a new directory called "CDE-project" (hint: "makedir <dir_name>") and then run the following command in /CDE-project: 
+```
+git init.
+```
+This will create an empty Git repository where all your documents will be stored. Create a new python file called "hello.py".
 
-1b. (Option b) Install Git Bash. Git Bash is solution for students how do not readily have Linux to access git commands. 
+- (Option b) Install Git Bash. Git Bash is solution for students how do not readily have Linux to access git commands. 
 
 2. Create a new Python file called "hello.py" (hint: "touch <file_name.py>) and use your favorite text editor to open it. Create a script that will ask for your name, receive an input, and then prints "Hello, <name>".
 
