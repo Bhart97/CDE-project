@@ -1,5 +1,5 @@
 ## Instruction
-### **Setup**
+### **a. Setup**
 
 This project was created under the following conditions:
 ```
@@ -16,7 +16,9 @@ Visual Studio Code (Python extension installed)
 - Aliases can be used to create shortcuts and can be stored in ```/home/<user>/.bash_aliases```
 - To shorten the path, you can write ```PROMPT_DIRTRIM=<#>``` at the last line of ```/home/<user>/.bash_rc```
 
-### Hello, World!
+
+
+### b. Hello, World!
 
 In this section, you will create a simple Python script that will ask for your name and says hello back through the Linux terminal.
 
