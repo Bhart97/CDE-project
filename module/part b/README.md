@@ -1,4 +1,4 @@
-## Working on the Cloud ##
+## Working on the Cloud
 
 **1. Running on a EC2 Instance**
 

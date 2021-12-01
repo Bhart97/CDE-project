@@ -16,9 +16,9 @@
 - Diagnose and analyze the metrics of running applications on the cloud.
 
 **Milestones:**
-- Module a - completing their first program
-- Module b - successfully host an application on the cloud
-- Module c - maintaining and automating their application
+- Module A - completing their first program.
+- Module B - successfully host an application on the cloud.
+- Module C - maintaining and automating their application.
 
 **Deliverables:**
 - Functional, interactive web database that contains OCP's cohort information and allows for queries by the end of 2021.
