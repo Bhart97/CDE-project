@@ -1,3 +1,9 @@
+## Objectives
+
+- Explore and understand how GitHub works.
+- Create a basic Python program.
+- Save changes from their local repository to the remote repository.
+
 ## Setup
 
 This project was created under the following conditions:
@@ -17,19 +23,19 @@ Visual Studio Code (Python extension installed)
 
 ## Hello, World!
 
-In this section, you will create a simple Python script that will ask for your name and says hello back through the Linux terminal.
+In this module, you will create a simple Python script that will say hello to the user.
 
 **1. Creating a GitHub repo**
 
 Login / create a GitHub account. GitHub offers a cloud-based solution to version control and software development. GitHub will allow you to transfer code from local to remote as well as collaborate with others on your project. Create a new repository titled "CDE-Project".
 
-**2. Generate Private SSH Key**
+**2. Generate a Private SSH Key**
 
 Before you can start editing and saving the changes to your project, you will need to authenticate your workstation and associate it with your GitHub account. Open the Linux terminal and run the following command
 ```
 ssh-keygen
 ```
-Press enter for it to save at the default location ```\home\<user>\.ssh\id_rsa``` and enter a (optional) password. Copy the entire generated key and add it your GitHub account (under settings > SSH and GPG keys > New SSH key). This will allow GitHub to verify your identity and allow you to save your changes remotely.
+Save at the default location ```\home\<user>\.ssh\id_rsa``` and enter a (optional) password. Copy the entire generated key and add it your GitHub account (under settings > SSH and GPG keys > New SSH key). This will allow GitHub to verify your identity and allow you to save your changes remotely.
 
 **3. Creating a New Repository**
 
@@ -41,7 +47,7 @@ This will create an empty Git repository where all your documents will be stored
 
 **4. Python Script**
 
-Create a new python file called "hello.py" ```(hint "touch <name.py>")``` and choose your favorite text editor to open the file. Your program will ask "What is your name?", receive an input from the user, and then greets them by saying "Hello, <name>!"
+Create a new python file called "hello.py" ```(hint "touch <name.py>")``` and choose your favorite text editor to open the file. Your program will simply print ```"Hello, <name>!"```
 Run your script:
 ```
 python3 <name.py>
@@ -57,8 +63,4 @@ git branch -M main
 git remote add origin git@github.com:<username>/CDE-Project.git
 git push -u origin main
 ```
-When you push the changes to the main branch, you are letting everyone know that the changes you have made the most up-to-date and (hopefully) working product. Whenever you make a clone onto another device, those changes will be reflected.
-
-**Note**
-- Why virtual environments? When using non-standard libraries, you can only have a single version of that library which can lead to conflicts for programs that are depended a specific version. Virtual environments solve this problem by creating an isolated environment that allows you to maintain your dependencies without affecting your other projects. Virtual environments act similar to containers as they are ideal for creating portability and isolation by only installing those libraries for that environment only.
-- Virtual environments must be activated each but can be configured in the settings to activate automatically.
+When you push the changes to the main branch, you are letting everyone know that the changes you have made the most up-to-date and (hopefully) working product. Whenever you make a clone onto another device or pull to merge with your working directory, those changes will be reflected in your local repo.
