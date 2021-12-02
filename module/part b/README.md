@@ -1,4 +1,4 @@
-## Objectives
+## Module B: Objectives
 
 - Create a EC2 instance and successfully host different applications.
 - Upload data to a bucket storage and into a MySQL databa.se.

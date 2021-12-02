@@ -1,4 +1,4 @@
-## Objectives
+## Module A: Objectives
 
 - Explore and understand how GitHub works.
 - Create a basic Python program.

@@ -1,4 +1,4 @@
-## Objectives
+## Module C: Objectives
 
 - Automate the application via Lambda functions
 - Identify areas of vulernability
