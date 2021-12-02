@@ -4,7 +4,7 @@
 
 **Description**: Students will host a web application on the cloud and demostrate their understanding of these core components: cloud computing, storage and database management, virtual networks, security, and cost analysis.
 
-**Constraints**: Completing the project will require basic knowledge from the technical track (CLI, Python, and SQL) and will take advantage of the AWS platform's Will low-cost / free cloud technology. Additional changes to project scope is dependent on the student's technical skills to explore other topics.
+**Constraints**: Completing the project will require basic knowledge from the technical track (CLI, Python, and SQL) and will take advantage of the AWS platform's low-cost / free cloud technology. Additional changes to project scope is dependent on the student's technical skills to explore other topics.
 
 **Goals**: 
 - Create and successfully run a Python script.
