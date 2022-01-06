@@ -5,7 +5,7 @@
 - Manage the security list to configure network traffic.
 - Configure a load balancer that distributes to the backend web servers.
 
-## TODO:
+TODO:
 The domain admin account will be used to create new users for the cloud service. Dynamic group policy should be used to automatically add the users to the correct group based on their tags.
 
 The network admin account should be used to provision VCN and manage the network traffic.
