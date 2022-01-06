@@ -14,7 +14,7 @@ Linux terminal (enable Windows Subsystem for Linux is recommended for Windows OS
 
 ## Hello, World!
 
-In this module, you will learn the basics of GitHub and create a Python program. It is recommended to use the command line for most steps to get more comfortable with Linux.
+In this module, you will learn the basics of GitHub, create a Python program, and how to automate your work. It is recommended to use the command line for most steps to get more comfortable with Linux.
 
 **1. Creating a GitHub repo**
 
@@ -60,12 +60,15 @@ Note: best practice would be to create a new branch from the main branch such th
 
 For this step, you will create a Bash script that will read the output from "hello.py" and store the content into a HTML file called "index.html". This will help familiarlize you with using automation tools via Linux
 
-Note, Bash scripts must have ```#!/bin/bash``` in order to run properly. You can view ```example.sh``` to help get started.
-
 After you have successfully created a working Bash script, open the HTML and see that the webpage now displays the output of your Python script.
 
+Note: Bash scripts must have ```#!/bin/bash``` in order to run properly. You can view ```example.sh``` to help get started.
+
 ## Helpful Tips
-- Visual Code is a versatile text editor compared to other text editors
 - If using WSL, to view the user directory you can use the following command: ```/mnt/c/users/<user>/```
 - Aliases can be used to create shortcuts to different directories and can be stored in ```/home/<user>/.bash_aliases```
 - To shorten the displayed path in the terminal, you can write ```PROMPT_DIRTRIM=<#>``` at the last line of ```/home/<user>/.bash_rc```
+- Visual Code is the recommended text editor for begineers because of robust features and versatility
+- Python resources https://learnxinyminutes.com/docs/python/
+- Linux resources https://learnxinyminutes.com/docs/bash/
+- Git resources https://learnxinyminutes.com/docs/git/
