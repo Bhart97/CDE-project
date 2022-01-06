@@ -18,13 +18,13 @@ Have students create a new user that is added to the appropriate group. Provisio
 
 ## Working on the Cloud
 **1. Creating a Compute Instance**
-## TODO: create VM with the required configurations and SSH key
+TODO: create VM with the required configurations and SSH key
 
 **2. Pull from GitHub**
-## TODO: pull from their repo (sample-project)
+TODO: pull from their repo (sample-project)
 
 **3. Configure Web Server**
-## TODO: install the appropriate web server and launch the HTML from sample-project
+TODO: install the appropriate web server and launch the HTML from sample-project
 
 **4. Load Balancer**
-## TODO: work as a team to create a load balancer connected to the backend web servers and configure any network requirements
+TODO: work as a team to create a load balancer connected to the backend web servers and configure any network requirements
