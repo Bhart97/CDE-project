@@ -68,7 +68,7 @@ Note: Bash scripts must have ```#!/bin/bash``` in order to run properly. You can
 - If using WSL, to view the user directory you can use the following command: ```/mnt/c/users/<user>/```
 - Aliases can be used to create shortcuts to different directories and can be stored in ```/home/<user>/.bash_aliases```
 - To shorten the displayed path in the terminal, you can write ```PROMPT_DIRTRIM=<#>``` at the last line of ```/home/<user>/.bash_rc```
-- Visual Code is the recommended text editor for begineers because of robust features and versatility
-- Python resources https://learnxinyminutes.com/docs/python/
-- Linux resources https://learnxinyminutes.com/docs/bash/
-- Git resources https://learnxinyminutes.com/docs/git/
+- Visual Code is a beginner-friendly text editor
+- [Python resources](https://learnxinyminutes.com/docs/python/)
+- [Linux resources](https://learnxinyminutes.com/docs/bash/)
+- [Git resources](https://learnxinyminutes.com/docs/git/)
