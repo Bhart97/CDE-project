@@ -1,12 +1,6 @@
 ## Module C: Objectives
 
-- Automate the application via Lambda functions
-- Identify areas of vulernability
+- Uploading data to Object storage
+- Updating a pre-existing database
 
-## Automating and Troubleshooting
-
-**1. Serverless Functions**
-
-**2. Troubleshooting**
-
-**3. Cost Analysis**
+## 

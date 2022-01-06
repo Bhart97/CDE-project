@@ -1,4 +1,10 @@
-if __name__ == '__main__':
-    print('What is your name? ', end='')
-    name = input()
-    print(f"Hello, {name}.")
+from datetime import datetime
+
+def function():
+    a = "this is an example Python script"
+    b  = datetime.now().strftime('%m-%d-%y %H:%M:%S')
+    return a, b
+input, date = function()
+
+print(f"Hello, {input}.")
+print(f"It is very simple and can display the current time: {date}.")
