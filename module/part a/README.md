@@ -2,7 +2,7 @@
 
 - Explore and understand how GitHub works.
 - Create the following: Python script and Bash script.
-- Save changes from their local repository to the remote repository.
+- Save changes from local repository to the remote repository.
 
 ## Setup
 
