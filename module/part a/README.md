@@ -40,7 +40,7 @@ git init
 
 **4. Python Script**
 
-Create a new python file called "hello.py" and open any text editor to create a script that will output text. Run your script to check for functionality. You can view ```hello.py``` to help get started.
+Create a new python file called ```hello.py``` and open any text editor to create a script that will output text. Run your script to check for functionality. You can view the example ```hello.py``` to help get started.
 
 **5. Merging with the Main Branch**
 
@@ -54,18 +54,27 @@ git push -u origin main
 ```
 When you push the changes to the main branch, you are letting everyone know that the changes you have made the most up-to-date and (hopefully) working product. Whenever you make a clone onto another device or merge with your working directory, the source code should reflect these changes.
 
-Note: best practice would be to create a new branch from the main branch such that you can work and save any changes without affecting the main branch until your source code is stable and working.
+Note: Best practice would be to create a new branch from the main branch such that you can work and save any changes without affecting the main branch until your source code is stable and working.
 
 **6. Bash Script**
 
-For this step, you will create a Bash script that will read the output from "hello.py" and store the content into a HTML file called "index.html". This will help familiarlize you with using automation tools via Linux
+For this step, you will create a Bash script that will read the output from ```hello.py``` and store the content into a HTML file called ```index.html```. This will help familiarlize you with Linux and how to do simple automation.
 
-After you have successfully created a working Bash script, open the HTML and see that the webpage now displays the output of your Python script.
+After you have successfully created a working Bash script, open the HTML and see that the webpage now displays the output of your Python script. Commit and push your work.
+```
+git add -A # will commit all changes
+git commit -m "message"
+git push -u origin main
+```
 
 Note: Bash scripts must have ```#!/bin/bash``` in order to run properly. You can view ```example.sh``` to help get started.
 
+**7. End of Module A**
+
+By the end of this module, you should have the following files on your GitHub under ```sample-project```: ```hello.py```, ```<script>.sh```, ```index.html```.
+
 ## Helpful Tips
-- If using WSL, to view the user directory you can use the following command: ```/mnt/c/users/<user>/```
+- If using Ubuntu, to view the user directory you can use the following command: ```/mnt/c/users/<user>/```
 - Aliases can be used to create shortcuts to different directories and can be stored in ```/home/<user>/.bash_aliases```
 - To shorten the displayed path in the terminal, you can write ```PROMPT_DIRTRIM=<#>``` at the last line of ```/home/<user>/.bash_rc```
 - For a beginner-friendly text editor, [Visual Code](https://code.visualstudio.com/) is recommended because of its robust features and versatility.
