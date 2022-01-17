@@ -32,3 +32,7 @@ TODO: install the appropriate web server and launch the HTML from sample-project
 **4. Load Balancer**
 
 TODO: work as a team to create a load balancer connected to the backend web servers and configure any network requirements
+
+**5. Security List**
+
+TODO: update the network traffic list
