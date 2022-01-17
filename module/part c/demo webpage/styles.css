@@ -1,0 +1,22 @@
+body {
+    font-family: "Lato Light";
+    background-color: #08182f;
+}
+table, th, td, tr {
+    color: #ffffffff;
+    padding: 10px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #085A99;
+}
+
+tr:nth-child(odd) {
+    background-color: #107EC1;
+}
+
+tr:nth-child(even) {
+    background-color: #afdcf7;
+}
