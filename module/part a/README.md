@@ -60,6 +60,8 @@ Note: Best practice would be to create a new branch from the main branch such th
 
 For this step, you will create a Bash script that will read the output from ```hello.py``` and store the content into a HTML file called ```index.html```. This will help familiarlize you with Linux and how to do simple automation.
 
+Quick overview of web development: HTML provides the structural components for webpages with the content being displayed within the <body> tags. CSS provides the visual designs. JavaScript is a popular scripting language that provides additional functionals and interactions with HTML elements. For this part, you need only concern yourself with modifying the <body> of the HTML.
+
 After you have successfully created a working Bash script, open the HTML and see that the webpage now displays the output of your Python script. Commit and push your work.
 ```
 git add -A # will commit all changes
@@ -76,7 +78,6 @@ By the end of this module, you should have the following files on your GitHub un
 ## Helpful Tips
 - If using Ubuntu, to view the user directory you can use the following command: ```/mnt/c/users/<user>/```
 - Aliases can be used to create shortcuts to different directories and can be stored in ```/home/<user>/.bash_aliases```
-- To shorten the displayed path in the terminal, you can write ```PROMPT_DIRTRIM=<#>``` at the last line of ```/home/<user>/.bash_rc```
 - For a beginner-friendly text editor, [Visual Code](https://code.visualstudio.com/) is recommended because of its robust features and versatility.
 - [Python resources](https://learnxinyminutes.com/docs/python/)
 - [Linux resources](https://learnxinyminutes.com/docs/bash/)

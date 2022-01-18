@@ -1,4 +1,4 @@
-# crude solution to reading CSV and converting to table due to CORS security rules for JavaScript
+# crude solution CORS security rules for JavaScript preventing local file access
 import csv
 
 # modify directory depending on OS / IDE

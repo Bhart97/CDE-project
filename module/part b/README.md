@@ -1,7 +1,7 @@
 ## Module B: Objectives
 
-- Create network resources.
-- Host a web server on a compute instance.
+- Create compute and network resources.
+- Remotely install NGINX web server and clone your project.
 - Manage the security list to configure network traffic.
 - Configure a load balancer that distributes to the backend web servers.
 
