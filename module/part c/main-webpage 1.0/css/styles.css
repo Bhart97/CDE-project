@@ -1,0 +1,14 @@
+body {
+    font-weight: bold;
+    font-size: 11px;
+    font-family: "Lato Light";
+}
+
+.header > * {
+    display: inline-block;
+    margin: auto;
+}
+
+.table .cohort {
+}
+

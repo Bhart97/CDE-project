@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Optimum Healthcare IT CareerPath Cohort</title>
+
+    <script src="./javascript/main.js"></script>
+
+	<link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+	<!-- header of the webpage -->
+	<div class=header>
+		<img src=./img/logo.svg style="height:100px;">
+	</div>
+
+	<div class="information">
+		<!-- tabs to display the information -->
+		<form method="get">
+			<fieldset>
+				<legend>Cohort</legend>
+				<div class="tabs">
+					<input type="checkbox" class="tab-checkbox" name="A" value="A"> 
+					<label for="A">Alpha</label>
+					<input type="checkbox" class="tab-checkbox" name="B" value="B">
+					<label for="B">Bravo</label>
+					<input type="checkbox" class="tab-checkbox" name="C" value="C">
+					<label for="C">Charlie</label>
+					<input type="checkbox" class="tab-checkbox" name="D" value="D">
+					<label for="D">Delta</label>
+					<button type="button" onclick="displayInfo()" style="float: right;">Search</button>
+				</div>
+			</fieldset>
+		</form>
+
+		<!-- the contents of the table is auto-generated -->
+		<div class="table">
+			<div id="A" class="cohort">
+				<h2>Cohort Alpha</h2>
+			</div>
+			<div id="B" class="cohort">
+				<h2>Cohort Bravo</h2>
+			</div>
+			<div id="C" class="cohort">
+				<h2>Cohort Charlie</h2>
+			</div>
+			<div id="D" class="cohort">
+				<h2>Cohort Delta</h2>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+
+</html>
