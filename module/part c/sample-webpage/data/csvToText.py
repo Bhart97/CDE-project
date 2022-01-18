@@ -2,7 +2,7 @@
 import csv
 
 # modify directory depending on OS / IDE
-dir = ".\\module\\part c\\demo webpage\\"
+dir = ".\\module\\part c\\sample-webpage\\data\\"
 file = open(dir + "delta.csv")
 csvreader = csv.reader(file)
 

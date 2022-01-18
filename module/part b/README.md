@@ -2,8 +2,8 @@
 
 - Create compute and network resources.
 - Remotely install NGINX web server and clone your project.
-- Manage the security list to configure network traffic.
 - Configure a load balancer that distributes to the backend web servers.
+- Manage the security list to configure network traffic.
 
 TODO:
 The domain admin account will be used to create new users for the cloud service. Dynamic group policy should be used to automatically add the users to the correct group based on their tags.
