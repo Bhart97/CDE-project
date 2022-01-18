@@ -1,6 +1,6 @@
 body {
     font-weight: bold;
-    font-size: 11px;
+    font-size: 12px;
     font-family: "Lato Light";
 }
 
@@ -10,5 +10,12 @@ body {
 }
 
 .table .cohort {
+    visibility: hidden;
 }
+
+table, th, td,tr {
+    padding: 10px;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
 
