@@ -1,4 +1,8 @@
-# crude solution CORS security rules for JavaScript preventing local file access
+""" 
+Crude solution CORS security rules for JavaScript preventing local file access.
+Used for demostration purposes.
+"""
+
 import csv
 
 # modify directory depending on OS / IDE

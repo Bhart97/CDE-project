@@ -20,7 +20,7 @@ EOF
 date_time=$(date +"%m-%d-%y %T")
 a="Hello, this is an example Bash script."
 b="It is very simple and can display the current time: "$date_time
-c="It can also store the content into a html file."
+c="It can also store the content into a HTML file."
 
 echo $a
 echo $b

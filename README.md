@@ -22,5 +22,3 @@
 **Deliverables:**
 - Successful implementation of web server that directs traffic properly via load balancer.
 - Update and maintain the main web server and database that details OCP's cohort information.
-
-

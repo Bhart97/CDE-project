@@ -1,21 +1,16 @@
 body {
     font-weight: bold;
-    font-size: 12px;
+    font-size: 14px;
     font-family: "Lato Light";
 }
 
-.header > * {
-    display: inline-block;
-    margin: auto;
-}
-
 .table .cohort {
-    visibility: hidden;
+    display: none;
 }
 
 table, th, td,tr {
     padding: 10px;
+    text-align: left;
     border: 1px solid black;
     border-collapse: collapse;
   }
-
