@@ -1,39 +1,51 @@
 /* This JavaScript will handle the DB connections and all HTTPs requests
-   DB schema: cohort.db > tables named after each cohort (Alpha, Bravo, etc.) > Name | Cohort | Technical Track | Location | Profile */
+   DB schema: cohorts > First Name | Last Name | Cohort | Technical Track | Location | Profile */
 
-var mysql = require("mysql");
+class Database {
+  #mysql;
+  #pool;
+  #statement;
 
-/**
- * Creates a connection pool to the MySQL database
- * 
- * TODO: store the secrets via Vaults services
- */
-var pool = mysql.createPool({
-  connectionLimit : "",
-  host            : "",
-  user            : "",
-  password        : "",
-  database        : ""
-});
+  constructor() {
+    this.#mysql = require("mysql");
 
-/**
- * Queries the database and returns the table. Assumes the table is named "cohort".
- * 
- * @return {object array} table ([ {row1}, {row2}, ..., {rowN} ])
- */
+    this.pool = mysql.createPool({
+      connectionLimit : "",
+      host            : "",
+      user            : "",
+      password        : "",
+      database        : ""
+    });
 
-function createTable() {
-  pool.query("SELECT * FROM cohort", function(err, result, fields) {
-    if (err) {
-      console.log(err);
-      next(err);
-      return;
+    statement = "";
+  }
+
+  /**
+   * Queries the database and returns the table. Only called when user updates the params
+   * 
+   * @return {object array} table ([ {row1}, {row2}, ..., {rowN} ])
+   */
+  createTable(params) {
+    statement = "SELECT * FROM cohorts WHERE";
+    if (params.length > 0) {
+      statement += " cohort = ?";
+      for (let i = 0; i < params.length - 1; i++) {
+        statement += " OR cohort = ?";
+      }
+    // if no parameters were selected, return an empty result
     } else {
-      return result
+      statement += " false";
     }
-  });
-}
 
-module.exports = {
-  createTable
+    pool.query(statement, params, function(err, result, fields) {
+      if (err) {
+        console.log(err);
+        next(err);
+        return;
+      } else { return result; }});
+  }
+
+  updateTable(params) {
+
+  }
 }

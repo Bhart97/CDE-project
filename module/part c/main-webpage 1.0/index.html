@@ -20,25 +20,14 @@
 	</div>
 
 	<!-- checkboxes to display the information -->
-	<div class="information">	
-		<fieldset>
-			<legend>Cohort</legend>
-			<div class="tabs">
-				<input type="checkbox" class="tab-checkbox" name="A" value="A">
-				<label for="A">Alpha</label>
-				<input type="checkbox" class="tab-checkbox" name="B" value="B">
-				<label for="B">Bravo</label>
-				<input type="checkbox" class="tab-checkbox" name="C" value="C">
-				<label for="C">Charlie</label>
-				<input type="checkbox" class="tab-checkbox" name="D" value="D">
-				<label for="D">Delta</label>
-				<button type="button" onclick="displayInfo()" style="float: right;">Search</button>
-			</div>
-		</fieldset>
-	</div>
+	<fieldset>
+		<legend>Cohort</legend>
+		<div id="cohort-options"></div>
+	</fieldset>
+
 
 	<!-- the contents of the table is auto-generated -->
-	<div id="mainTable" class="table">
+	<div class="table">
 		<div id="A" class="cohort">
 			<h2>Cohort Alpha</h2>
 		</div>
@@ -49,219 +38,250 @@
 			<h2>Cohort Charlie</h2>
 		</div>
 		<div id="D" class="cohort">
-			<table>
+			<table id="main-table">
 				<tr>
-					<th>Name</th>
+					<th>First Name</th>
+					<th>Last Name</th>
 					<th>Cohort</th>
 					<th>Technical Track</th>
 					<th>Location</th>
 					<th>LinkedIn Profile</th>
 				</tr>
 				<tr>
-					<td>Alejandro Mendoza</td>
+					<td>Alejandro</td>
+					<td>Mendoza</td>
 					<td>Delta</td>
 					<td>Junior PM / Ancillary Analyst</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Alexis Maddox</td>
+					<td>Alexis</td>
+					<td>Maddox</td>
 					<td>Delta</td>
 					<td>Junior PM / Ancillary Analyst</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Andrew (Drew) Thomas</td>
+					<td>Andrew (Drew)</td>
+					<td>Thomas</td>
 					<td>Delta</td>
 					<td>Cloud Data Engineer</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Anita Danthi</td>
+					<td>Anita</td>
+					<td>Danthi</td>
 					<td>Delta</td>
 					<td>Junior PM / Ancillary Analyst</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Brandon Yu</td>
+					<td>Brandon</td>
+					<td>Yu</td>
 					<td>Delta</td>
 					<td>Cloud Data Engineer</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Bransen Smith</td>
+					<td>Bransen</td>
+					<td>Smith</td>
 					<td>Delta</td>
 					<td>Business Intelligence</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Christian Williams</td>
+					<td>Christian</td>
+					<td>Williams</td>
 					<td>Delta</td>
 					<td>Cloud Data Engineer</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Chyna PoorThunder</td>
+					<td>Chyna</td>
+					<td>PoorThunder</td>
 					<td>Delta</td>
 					<td>Junior PM / Ancillary Analyst</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Derick Dankwah</td>
+					<td>Derick</td>
+					<td>Dankwah</td>
 					<td>Delta</td>
 					<td>ServiceNow</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Dhalia Bejimi </td>
+					<td>Dhalia</td>
+					<td>Bejimi</td>
 					<td>Delta</td>
 					<td>Epic Ambulatory</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Dragana Damjanovic</td>
+					<td>Dragana</td>
+					<td>Damjanovic</td>
 					<td>Delta</td>
 					<td>Junior PM / Ancillary Analyst</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Eniola Adewunmi</td>
+					<td>Eniola</td>
+					<td>Adewunmi</td>
 					<td>Delta</td>
 					<td>Junior PM / Ancillary Analyst</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Eric Tran</td>
+					<td>Eric</td>
+					<td>Tran</td>
 					<td>Delta</td>
 					<td>Cloud Data Engineer</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Gary Kulik</td>
+					<td>Gary</td>
+					<td>Kulik</td>
 					<td>Delta</td>
 					<td>Junior PM / Ancillary Analyst</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Izuchukwu (Izzy) Matthew</td>
+					<td>Izuchukwu (Izzy)</td>
+					<td>Matthew</td>
 					<td>Delta</td>
 					<td>ServiceNow</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Jack Menard</td>
+					<td>Jack</td>
+					<td>Menard</td>
 					<td>Delta</td>
 					<td>Junior PM / Ancillary Analyst</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Jahmeel Grayman</td>
+					<td>Jahmeel</td>
+					<td>Grayman</td>
 					<td>Delta</td>
 					<td>Junior PM / Ancillary Analyst</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Julian Massiah</td>
+					<td>Julian</td>
+					<td>Massiah</td>
 					<td>Delta</td>
 					<td>Junior PM / Ancillary Analyst</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Justin Sento</td>
+					<td>Justin</td>
+					<td>Sento</td>
 					<td>Delta</td>
 					<td>ServiceNow</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Keenan White</td>
+					<td>Keenan</td>
+					<td>White</td>
 					<td>Delta</td>
 					<td>Junior PM / Ancillary Analyst</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Kevin Hoang</td>
+					<td>Kevin</td>
+					<td>Hoang</td>
 					<td>Delta</td>
 					<td>Junior PM / Ancillary Analyst</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Kylen Small</td>
+					<td>Kylen</td>
+					<td>Small</td>
 					<td>Delta</td>
 					<td>Business Intelligence</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Lee Brooks </td>
+					<td>Lee</td>
+					<td>Brooks</td>
 					<td>Delta</td>
 					<td>Cloud Data Engineer</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Miguel Caibigan</td>
+					<td>Miguel</td>
+					<td>Caibigan</td>
 					<td>Delta</td>
 					<td>Junior PM / Ancillary Analyst</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Patricia Perez</td>
+					<td>Patricia</td>
+					<td>Perez</td>
 					<td>Delta</td>
 					<td>Epic HB Claims</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Tanny Carmona</td>
+					<td>Tanny</td>
+					<td>Carmona</td>
 					<td>Delta</td>
 					<td>Junior PM / Ancillary Analyst</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Toi Gardner</td>
+					<td>Toi</td>
+					<td>Gardner</td>
 					<td>Delta</td>
 					<td>ServiceNow</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Tracey Enejor</td>
+					<td>Tracey</td>
+					<td>Enejor</td>
 					<td>Delta</td>
 					<td>Junior PM / Ancillary Analyst</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Varun Reddy</td>
+					<td>Varun</td>
+					<td>Reddy</td>
 					<td>Delta</td>
 					<td>Business Intelligence</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>Walter Tolero</td>
+					<td>Walter</td>
+					<td>Tolero</td>
 					<td>Delta</td>
 					<td>Business Intelligence</td>
 					<td></td>
