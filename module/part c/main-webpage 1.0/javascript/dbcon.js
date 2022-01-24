@@ -1,15 +1,15 @@
 /* This JavaScript will handle the DB connections and all HTTPs requests
    DB schema: cohorts > First Name | Last Name | Cohort | Technical Track | Location | Profile */
 
-class Database {
-  #mysql;
-  #pool;
-  #statement;
+export class Database {
+  mysql;
+  pool;
+  statement;
 
   constructor() {
-    this.#mysql = require("mysql");
+    this.mysql = require("mysql");
 
-    this.pool = mysql.createPool({
+    this.pool = this.mysql.createPool({
       connectionLimit : "",
       host            : "",
       user            : "",
@@ -17,27 +17,32 @@ class Database {
       database        : ""
     });
 
-    statement = "";
+    this.statement = "";
   }
 
   /**
-   * Queries the database and returns the table. Only called when user updates the params
+   * Queries the database and returns the table.
+   * Does not prevent SQL injections so do not allow user to manually input data.
    * 
-   * @return {object array} table ([ {row1}, {row2}, ..., {rowN} ])
+   * @param  {String array}   params  selected cohorts ["Alpha", ...]
+   * @return {Object array}   result  [{row1}, {row2}, ..., {rowN}]
    */
   createTable(params) {
-    statement = "SELECT * FROM cohorts WHERE";
+    this.statement = "SELECT * FROM cohorts WHERE";
+
+    // builds the SQL statement
     if (params.length > 0) {
-      statement += " cohort = ?";
-      for (let i = 0; i < params.length - 1; i++) {
-        statement += " OR cohort = ?";
+      this.statement += " cohort = " + params[0];
+      for (let i = 1; i < params.length; i++) {
+        this.statement += " OR cohort = " + params[i];
       }
+
     // if no parameters were selected, return an empty result
     } else {
-      statement += " false";
+      this.statement += " false";
     }
 
-    pool.query(statement, params, function(err, result, fields) {
+    pool.query(this.statement + " ORDER BY Cohort ASC", function(err, result, fields) {
       if (err) {
         console.log(err);
         next(err);
@@ -45,7 +50,25 @@ class Database {
       } else { return result; }});
   }
 
+  /**
+   * Extends the SQL statement to perform additional sorting and updates the table accordingly.
+   * Does not prevent SQL injections so do not allow user to manually input data.
+   * 
+   * @param  {String array}   params  [col1, col2, ...]
+   * @return {Object array}   result  [{row1}, {row2}, ..., {rowN}]
+   */
   updateTable(params) {
+    let sort_query = this.statement + " ORDER BY";
+    for (let i = 0; i < params.length - 1; i++) {
+      sort_query += " " + params[i];
+    }
+    sort_query += " " + params.at(-1);
 
+    this.pool.query(sort_query, function(err, result, fields) {
+      if (err) {
+        console.log(err);
+        next(err);
+        return;
+      } else { return result; }});
   }
 }

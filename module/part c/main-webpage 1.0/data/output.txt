@@ -1,3 +1,4 @@
+<thead>
 <tr>
 <th>First Name</th>
 <th>Last Name</th>
@@ -6,6 +7,8 @@
 <th>Location</th>
 <th>LinkedIn Profile</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td>Alejandro</td>
 <td>Mendoza</td>
@@ -216,4 +219,4 @@
 <td>Business Intelligence</td>
 <td></td>
 <td></td>
-</tr>
+</tr></tbody>
