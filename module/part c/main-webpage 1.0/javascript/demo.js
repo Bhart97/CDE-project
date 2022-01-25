@@ -30,6 +30,7 @@ function displayOptions() {
         let label = document.createElement("label");
         label.for = listOfCohorts[i][0];
         label.innerHTML = listOfCohorts[i];
+        label.style.marginRight = "10px";
         options.append(checkbox);
         options.append(label);
     }
@@ -37,7 +38,7 @@ function displayOptions() {
     // creates the search button
     let button = document.createElement("button");
     button.addEventListener("click", displayDemo)
-    button.style.float = "right";
+    button.style.marginLeft = "10px";
     button.innerHTML = "search";
     options.append(button);
 }

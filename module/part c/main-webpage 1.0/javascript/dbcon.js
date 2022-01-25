@@ -42,6 +42,7 @@ export class Database {
       this.statement += " false";
     }
 
+    // executes the SQL statement
     pool.query(this.statement + " ORDER BY Cohort ASC", function(err, result, fields) {
       if (err) {
         console.log(err);
@@ -64,6 +65,7 @@ export class Database {
     }
     sort_query += " " + params.at(-1);
 
+    // executes the SQL statement
     this.pool.query(sort_query, function(err, result, fields) {
       if (err) {
         console.log(err);
@@ -72,3 +74,5 @@ export class Database {
       } else { return result; }});
   }
 }
+
+
