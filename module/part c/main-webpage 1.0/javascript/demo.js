@@ -7,7 +7,6 @@ var listOfCohorts = ['Alpha', 'Bravo', 'Charlie', 'Delta'];
 window.onload = function () {
     displayOptions();
     sortDemo();
-    console.log("test");
 }
 
 /**
