@@ -9,6 +9,7 @@ export class Database {
   constructor() {
     this.mysql = require("mysql");
 
+    // TODO: use Vaults to store secrets
     this.pool = this.mysql.createPool({
       connectionLimit : "",
       host            : "",
@@ -43,16 +44,16 @@ export class Database {
     }
 
     // executes the SQL statement
-    pool.query(this.statement + " ORDER BY Cohort ASC", function(err, result, fields) {
+    pool.query(this.statement + " ORDER BY Cohort ASC;", function(err, result, fields) {
       if (err) {
-        console.log(err);
         next(err);
         return;
       } else { return result; }});
   }
 
   /**
-   * Extends the SQL statement to perform additional sorting and updates the table accordingly.
+   * Extends the SQL statement to perform additional sorting based on the given columns
+   * and updates the table accordingly.
    * Does not prevent SQL injections so do not allow user to manually input data.
    * 
    * @param  {String array}   params  [col1, col2, ...]
@@ -63,12 +64,11 @@ export class Database {
     for (let i = 0; i < params.length - 1; i++) {
       sort_query += " " + params[i];
     }
-    sort_query += " " + params.at(-1);
+    sort_query += " " + params.at(-1) + ";";
 
     // executes the SQL statement
     this.pool.query(sort_query, function(err, result, fields) {
       if (err) {
-        console.log(err);
         next(err);
         return;
       } else { return result; }});
