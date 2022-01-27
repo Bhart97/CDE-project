@@ -73,6 +73,21 @@ export class Database {
         return;
       } else { return result; }});
   }
+
+  /**
+   * Returns an array that contains the distinct values for the given column.
+   * 
+   * @param   {String} col 
+   * @returns {array}
+   */
+  getDistinct(col) {
+    let query = "SELECT DISTINCT " + col + " FROM cohorts;"
+    this.pool.query(query, function(err, result, fields) {
+      if (err) {
+        next(err);
+        return;
+      } else { return result; }});
+  }
 }
 
 

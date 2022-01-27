@@ -74,7 +74,7 @@ function sortDemo() {
 
         outer.classList.add("arrow");
         if (i == 0) {
-            inner.classList.add("up-arrow");              // first column will be ascending
+            inner.classList.add("up-arrow");                // first column will be ascending
         } else {
             inner.classList.add("none");
         }

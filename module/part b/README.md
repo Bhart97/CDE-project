@@ -5,16 +5,7 @@
 - Configure a load balancer that distributes to the backend web servers.
 - Manage the security list to configure network traffic.
 
-TODO:
-The domain admin account will be used to create new users for the cloud service. Dynamic group policy should be used to automatically add the users to the correct group based on their tags.
-
-The network admin account should be used to provision VCN and manage the network traffic.
-
-Have students create a new user that is added to the appropriate group. Provision a public subnet and private subnet with the following components: 
-- private and public subnet, internet gateway
-- private compute instances that will host web server and run the HTML they have created
-- public load balancer that will randomly distribute the traffic to any of the compute instances
-- this means that each time the load balancer is accessed, the information displayed should be one of the HTML created.
+TODO: IAM accounts and accomplished via automation and scripts
 
 ## Working on the Cloud
 **1. Creating a Compute Instance**
@@ -36,3 +27,10 @@ TODO: work as a team to create a load balancer connected to the backend web serv
 **5. Security List**
 
 TODO: update the network traffic list
+
+TODO: additional topics to explore
+- resource manager to deploy multiple computer resources (e.g., Terraform)
+- create backups and delete / restore
+- network peering with previous cohorts
+- logging / cost analysis that sends an email of a daily summary
+
