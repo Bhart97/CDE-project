@@ -1,6 +1,7 @@
 ## Module C: Objectives
 
-- Uploading data to Object storage
-- Updating MySQL database
-
-## 
+TODO:
+- uploading to Object storage
+- updating database
+- code maintenance (updating website and taking it offline)
+- setting up autoscaling and LB
