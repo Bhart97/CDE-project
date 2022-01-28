@@ -20,7 +20,7 @@ Note:
 
 In this module, you will learn the basics of GitHub, create a Python program, and how to automate your work. It is recommended to use the CLI whenever possible such as creating directories or files. Becoming comfortable using command lines will yield more benefits in your career in cloud engineering.
 
-This entire module can be accomplished through Linux, so it will help you significantly to recall different Linux commands and use this [resource](https://learnxinyminutes.com/docs/bash/) for reference.
+This entire module can be accomplished through Linux, so use this resource for [reference](https://learnxinyminutes.com/docs/bash/).
 
 **1. Creating a GitHub repo**
 
