@@ -1,0 +1,32 @@
+CDE project review:
+part a:
+- explore how Windows generates ssh key
+- Put name within the Python script
+- mention that they can view HTML file and understand the website are files
+
+part b:
+- private cloud, 
+- AWS and branch out to other cloud services if required (other options include Azure)
+- basic track and advanced track
+
+- basic: take HTML and create s3 bucket, create EC2 instance, create IAM role for lambda function to s3 bucket and ec2 instance
+-- ssh into VM and take screenshot of HTML
+-- compute, storage, functions, and IAM
+
+- advanced: write a script that does all of that (cloudformations script), console can be used for lambda
+
+- apache webserver. api gateway between s3 and lambda function.
+- free tier services, lambda is free for usage. account per cohort
+
+- NoSQL and DynamoDB?
+- Aura db and host
+- Cohort index file, each cohort can modify
+- part c group project, create a script and update the db
+- dynamically update rather than edit the js
+- implement changelog
+
+- apititude and how do you adapt to changes 
+- create Optimum GitHub aacount
+
+
+- part a: summary of why we did
