@@ -10,16 +10,16 @@ In this module, you will be working with ```Amazon Web Services``` and gain valu
 
 An IAM account for AWS should have been created to access these resources on the Optimum HIT CareerPath private cloud. All security features such as policies and security list will be handled by the administrators. While working, consider what security implementations would be required.
 
-There are two paths available: the beginner's path is recommended for those not confident with the cloud and will use the console while the intermediate path is for those already familar with the console and will leverage automation to accomplish the same goals. Those who will take the beginner's path are strongly advised to follow along the intermediate path afterwards.
+There are two paths available: the beginner's path is recommended for those not confident with the cloud and will use the console while the intermediate path is for those already familar with the console and will leverage automation to accomplish the same goals. Those who will take the beginner's path are strongly advised to follow along the intermediate path afterwards. For the intermediate path, it is required to work as a team to understand the process.
 
 ## Working on the Cloud: Console
 **1. Creating a Compute Instance**
 
-TODO: through the console, create a EC2 instance and successfully SSH
+TODO: create a EC2 instance and successfully SSH
 
 **2. Uploading to Object Storage**
 
-TODO: using Lambda function to upl
+TODO: upload HTML to s3 storage
 
 **3. Configure Web Server**
 
@@ -38,10 +38,14 @@ TODO: use CloudFormation to provision the EC2 resources
 
 TODO: use lambda function to upload to s3 bucket
 
-**3
+**3. AWS Deployments with Ansible**
+
+TODO: use Ansible playbooks to automate your AWS deployments
+
+**4. Load Balancer**
+
 
 TODO: additional topics to explore
-- resource manager to deploy multiple computer resources (e.g., Terraform)
 - create backups and delete / restore
 - network peering with previous cohorts
 - logging / cost analysis that sends an email of a daily summary

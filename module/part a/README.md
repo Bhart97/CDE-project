@@ -8,8 +8,8 @@
 
 ```
 Python3
-Text editor*
-Linux terminal**
+Text editor
+Linux terminal
 ```
 
 Note: 
