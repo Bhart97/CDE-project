@@ -22,7 +22,7 @@ In this module, you will learn the basics of GitHub, create a Python program, an
 
 This entire module can be completed through Linux, so use this resource for [reference](https://learnxinyminutes.com/docs/bash/).
 
-**1. Creating a GitHub repo**
+**1. Creating a GitHub Repo**
 
 Login / create a GitHub account. GitHub offers a cloud-based solution to version control and software development. This service allows you to upload your projects to remote repositories as well as streamlining collaboration with others.
 
@@ -61,7 +61,7 @@ Within the same directory where you initialized Git, create a new python file ca
 ```
 You can view the example ```hello.py``` to help get started.
 
-**5. Merging with the Main Branch**
+**5. Commiting the Changes**
 
 In order to save these changes to the main branch on GitHub, you will need to commit these changes before pushing them. Commits are snapshots your project and allows you to rollback to previous versions. Modify and run the following commands:
 ```
@@ -73,7 +73,7 @@ git push -u origin main
 ```
 When you push the changes to the main branch, you are letting everyone know that the changes made are stable and working. Best practice is to use [branching](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches) which allows you to work in isolation without affecting other branches. Whenever you make a clone onto another device or merge with your working directory, these changes should be reflected.
 
-**6. Bash Script**
+**6. Automation Through Scripting**
 
 Automation is what allows for cloud engineers to become successful in their careers. For this step, you will be creating a Bash script that will automatically run the ```hello.py``` that you have created and stored its content within a HTML file called ```<firstname_lastname>.html```. You are not required to understand web programming to complete this step but here is a quick overview: HTML provides the structural component to store data, CSS makes your web page more visually appealing and intuitive, and JavaScript gives functionality to your web page. You need only to concern with [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML).
 
