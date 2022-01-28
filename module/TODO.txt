@@ -1,8 +1,4 @@
 CDE project review:
-part a:
-- explore how Windows generates ssh key
-- Put name within the Python script
-- mention that they can view HTML file and understand the website are files
 
 part b:
 - private cloud, 
@@ -27,6 +23,3 @@ part b:
 
 - apititude and how do you adapt to changes 
 - create Optimum GitHub aacount
-
-
-- part a: summary of why we did

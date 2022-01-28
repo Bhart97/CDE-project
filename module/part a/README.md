@@ -78,7 +78,7 @@ Note:
 
 **6. Bash Script**
 
-Automation is what allows for cloud engineers to become successful in their careers. For this step, you will be creating a Bash script that will automatically run the ```hello.py``` that you have created and stored its content within a HTML file called ```index.html```. You are not required to understand web programming to accomplish this step but here is a quick overview: HTML provides the structural component to house data, CSS makes your web page more visually appealing and intuitive, and JavaScript gives functionality to your web page. You need only to concern with how HTML works.
+Automation is what allows for cloud engineers to become successful in their careers. For this step, you will be creating a Bash script that will automatically run the ```hello.py``` that you have created and stored its content within a HTML file called ```<firstname_lastname>.html```. You are not required to understand web programming to accomplish this step but here is a quick overview: HTML provides the structural component to house data, CSS makes your web page more visually appealing and intuitive, and JavaScript gives functionality to your web page. You need only to concern with how HTML works.
 
 Carefully examine ```example.sh``` to understand how the necessary HTML file is created and how the outputs from commands can be stored into variables. Create a new Bash script called ```script.sh``` and you can run the following command through either the Linux terminal or Windows Command Prompt:
 ```
@@ -101,7 +101,7 @@ By the end of this module, you should have the following files on your GitHub un
 ```
 sample-project/
     - hello.py
-    - index.html
+    - <firstname_lastname>.html
     - script.sh
 ```
 Through this module, you should have learned how create a working program through Python and how to automate your work such that any changes to your Python program can quickly be reflected on your HTML file without much effort. For the next module, you will be uploading the HTML file you have created and host it on a web server on the cloud.
