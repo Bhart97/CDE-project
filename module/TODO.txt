@@ -1,9 +1,7 @@
 CDE project review:
 
 part b:
-- private cloud, 
-- AWS and branch out to other cloud services if required (other options include Azure)
-- basic track and advanced track
+
 
 - basic: take HTML and create s3 bucket, create EC2 instance, create IAM role for lambda function to s3 bucket and ec2 instance
 -- ssh into VM and take screenshot of HTML
