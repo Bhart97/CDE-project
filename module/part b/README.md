@@ -84,7 +84,7 @@ Verify that the stack was successfully. Why use CloudFormation? Allows for manag
 
 **2. Serverless Functions**
 
-![Alt text](img/Serverlessfunction.png?raw=true)
+![Alt text](img/ServerlessFunction.png?raw=true)
 
 **3. AWS Deployments with Ansible**
 
