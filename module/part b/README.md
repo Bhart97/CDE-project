@@ -77,20 +77,18 @@ Troubleshooting:
 
 **4. Load Balancer**
 
-For this step, only one individual is required to complete this step but discuss with your team members about the implementation details. In order to create an ELB, you will require a target group that contains each VM as the backend server. Once your ELB is online, use your browser and verify that each page should display the different HTML pages created.
+For this step, only one individual is required to complete this step but discuss with your team members about the implementation details. In order to create an ELB, you will require a target group that contains each VM as the backend server. Once your ELB is online, use your browser and verify that each page displays the different HTML pages created.
 
 ## Working on the Cloud: Automation
 
-The basic track will focus on using the AWS console in order to create resources. Each student will individually create their EC2 instances and install the required packages. Shared resources include the VPC that they will be working on as well as a S3 bucket. Students will work together to discuss the implementations of an ELB and verify that they have successfully created a working backend web server.
-
-Beginners should explore the console and understand its layout while those more familiar are recommended to use the AWS CLI.
+The intermediate track will focus on using automation tools within AWS for resource and configuration management. This track will accomplish the same goals as the beginner's track but through more efficent and practical methods. Students can either collaborate on a single solution or work independently (recommended). 
 
 **1. Provisioning Infrastructure-As-Code**
 
 ![Alt text](img/CloudFormation.png?raw=true)
 Source: AWS
 
-CloudFormation provides an Infrastructure-as-Code solution to provisioning and managing resources written as a template. Delete any pre-existing compute resources Use the provided template and modify the necessary fields. Create the EC2 instances using these parameters when asked for:
+[CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) provides an Infrastructure-as-Code solution to provisioning and managing resources written as a template. Delete any pre-existing compute resources Use the provided template and modify the necessary fields. Create the EC2 instances using these parameters when asked for:
 ```
 ```
 
@@ -99,23 +97,27 @@ Verify that the stack was successfully. Why use CloudFormation? Allows for manag
 Note:
 - For learning purposes, you will be launching a single EC2 instance but you can modify the code to create multiple EC2 instances with the same configurations.
 
-**2. Serverless Functions**
+**2. AWS Deployments with Ansible**
 
-![Alt text](img/ServerlessFunction.png?raw=true)
-Source: AWS
+[Amazon Systems Manager](https://aws.amazon.com/blogs/mt/keeping-ansible-effortless-with-aws-systems-manager/) in combination with Ansible will allow for a powerful configuration management of our EC2 instances. These tools will allow you to install software packages remotely rather than performing manual SSH connections.
 
-Lambda functions allow you to run code with provisioning or managing infrastructure and allows you to automatically respond to events. You create a function such that whenever the S3 bucket gets updated, it will SSH automatically into your EC2 instances and pull that object. While this is not very practical, it is increase your exposure to automation with AWS Lambda.
+Create an Ansible playbook that will install the target EC2 instances with an Apache HTTP web server.
+
+**3. Serverless Functions**
+
+[AWS Lambda](https://aws.amazon.com/lambda/) enables serverlesw functions allow you to run code with provisioning or managing infrastructure and allows you to automatically respond to events. You create a function such that whenever the S3 bucket gets updated, it will SSH automatically into your EC2 instances and pull that object. While this is not very practical, it is increase your exposure to automation with AWS Lambda.
+
+Make sure that it downloads the appropriate destination.
 
 - Lambda requires SSH
 - API gateway?
 
-**3. AWS Deployments with Ansible**
-
-TODO: use Ansible playbooks to automate your AWS deployments
-
 **4. Load Balancer**
+
+Using CloudFormation, create an ELB that is given the necessary parameters to recreate the appropriate HTTP backend web server.
 
 ## End of Module
 
-After your work has been checked, shut down.
+By the end of this module, you will have successfully created an EC2 instance that can R/W with your S3 bucket, connect into your VM and install Apache Web Server, and have an ELB that distributes incoming traffic to the backend web servers. This work was accomplished either through the console or AWS CLI.
 
+In the intermediate track, you will have used CloudFormation and understand how Infrastructure-as-Code allows for better resource management. Deployed software packages through Ansible as a configuration mangement tool. Finally, how serverless functions allows for event-driven automation of your workflow.

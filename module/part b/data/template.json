@@ -46,18 +46,6 @@
                 "SubnetId": { "Ref": "Subnet" }
             }
         }
-		"Server2": {
-            "Type": "AWS::EC2::Instance",
-            "Properties": {
-                "ImageId": "ami-0a8b4cd432b1c3063",
-                "InstanceType": { "Ref": "InstanceType" },
-                "KeyName": { "Ref": "KeyName" },
-                "SecurityGroupIds": [
-                    { "Ref": "SecurityGroup" }
-                ],
-                "SubnetId": { "Ref": "Subnet" }
-            }
-        }
     },
     "Outputs": {
         "PublicName": {
