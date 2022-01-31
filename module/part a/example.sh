@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# creates a new file called "index.html" and stores the following content until it reaches EOF
+# creates a new file called "index.html" and stores the following text until it reaches EOF
+# which represents a skeleton HTML
 touch index.html
 cat > index.html << EOF
 <!DOCTYPE html>
@@ -21,8 +22,8 @@ date_time=$(date +"%m-%d-%y %T")
 a="Hello, this is an example Bash script."
 b="You can use command substitutions such as \$(command)."
 c="This will evaulate the expression as a command rather than as literal strings."
-d="For example \$date_time is executed and returns: "$date_time
+d="For example \$date_time is interpreted as a command and returns: "$date_time"."
 
-# the body tag is where the displayed content will be stored
-# and the variables [a, b, c, d] will be displayed on the web page
+# the following command searches for the body closing tag </body> within the HTML file
+# and prepends the variables [a, b, c, d] to be displayed on the web page with line breaks <br>
 sed -i -e "\@</body>@i\\$a<br>$b<br>$c<br>$d" *.html
