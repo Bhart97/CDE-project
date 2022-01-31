@@ -105,12 +105,12 @@ Create an Ansible playbook that will install the target EC2 instances with an Ap
 
 **3. Serverless Functions**
 
-[AWS Lambda](https://aws.amazon.com/lambda/) enables serverlesw functions allow you to run code with provisioning or managing infrastructure and allows you to automatically respond to events. You create a function such that whenever the S3 bucket gets updated, it will SSH automatically into your EC2 instances and pull that object. While this is not very practical, it is increase your exposure to automation with AWS Lambda.
+[AWS Lambda](https://aws.amazon.com/lambda/) enables serverless functions allow you to run code with provisioning or managing infrastructure and allows you to automatically respond to events. You create a function such that whenever the S3 bucket gets updated, it will SSH automatically into your EC2 instances and pull that object. While this is not very practical, it is increase your exposure to automation with AWS Lambda.
 
-Make sure that it downloads the appropriate destination.
+Make sure that it downloads to the appropriate destination.
 
 - Lambda requires SSH
-- API gateway?
+- API gateway? make a HTTP request to API endpoint and trigger the AWS Lambda function
 
 **4. Load Balancer**
 
