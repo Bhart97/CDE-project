@@ -98,7 +98,7 @@ Note:
 
 **2. AWS Deployments with Ansible**
 
-[Ansible](https://www.redhat.com/sysadmin/ansible-provisioning-aws-cloud) is a configuration management tool that makes the deployment of software packages to EC2 instances easy. You will create a control node that will manage a selection of EC2 instances and the control node will be given permission to connect via SSH and deploys an Apache HTTP web server onto these remote machines.
+[Ansible](https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html) is a configuration management tool that makes the deployment of software packages to EC2 instances easy. You will create a control node that will manage a selection of EC2 instances and the control node will be given permission to connect via SSH and deploys an Apache HTTP web server onto these remote machines.
 
 Use CloudFormation to create an Ansible stack which includes the control node. Use the Ansible playbook for the deployment of Apache HTTP web servers onto the target EC2 instances.
 
