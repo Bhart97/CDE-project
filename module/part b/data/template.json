@@ -1,7 +1,7 @@
 {
 	"AWSTemplateFormatVersion" : "2010-09-09",
 	
-    "Description": "CloudFormation template for creating an ec2 instance",
+    "Description": "CloudFormation template for creating an EC2 instance",
 	
     "Parameters": {
         "KeyName": {
@@ -34,7 +34,7 @@
         }
     },
     "Resources": {
-        "Server1": {
+        "Server": {
             "Type": "AWS::EC2::Instance",
             "Properties": {
                 "ImageId": "ami-0a8b4cd432b1c3063",
