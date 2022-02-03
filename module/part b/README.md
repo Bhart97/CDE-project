@@ -100,12 +100,14 @@ Note:
 
 [Ansible](https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html) is a configuration management tool that makes the deployment of software packages to EC2 instances easy. You will create a control node that will manage a selection of EC2 instances and the control node will be given permission to connect via SSH and deploys an Apache HTTP web server onto these remote machines.
 
+TODO
 Use CloudFormation to create an Ansible stack which includes the control node. Use the Ansible playbook for the deployment of Apache HTTP web servers onto the target EC2 instances.
 
 **3. Serverless Functions**
 
 [AWS Lambda](https://aws.amazon.com/lambda/) enables serverless functions allow you to run code with provisioning or managing infrastructure and allows you to automatically respond to events. You create a function such that whenever the S3 bucket gets updated, it will SSH automatically into your EC2 instances and pull that object. While this is not very practical, it is increase your exposure to automation with AWS Lambda.
 
+TODO
 - Lambda will require SSH permission to EC2
 - Alternative solution, use API gateway that will receive a HTTP request and trigger
 
