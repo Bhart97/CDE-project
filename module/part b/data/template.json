@@ -1,7 +1,7 @@
 {
 	"AWSTemplateFormatVersion" : "2010-09-09",
 	
-    "Description": "CloudFormation template for creating an EC2 instance",
+    "Description": "CloudFormation template for creating EC2 instances",
 	
     "Parameters": {
         "KeyName": {
@@ -9,14 +9,17 @@
             "Type": "AWS::EC2::KeyPair::KeyName",
             "ConstraintDescription" : "must be the name of an existing EC2 KeyPair."
         },
+        
         "VPC": {
             "Type": "AWS::EC2::VPC::Id",
             "Default": "id of existing VPC"
         },
+
         "Subnet": {
             "Type": "AWS::EC2::Subnet::Id",
             "Default": "id of existing subnet"
         },
+
         "InstanceType": {
             "Description": "WebServer EC2 instance type",
             "Type": "String",
@@ -28,34 +31,40 @@
             ],
 			"ConstraintDescription" : "must be a valid EC2 instance type."
         },
+
         "SecurityGroup": {
             "Type": "AWS::EC2::SecurityGroup::Id",
             "Default": "id of existing security group"
         }
     },
+
     "Resources": {
-        "Server": {
+        "Server1": {
             "Type": "AWS::EC2::Instance",
             "Properties": {
                 "ImageId": "ami-0a8b4cd432b1c3063",
                 "InstanceType": { "Ref": "InstanceType" },
-                "KeyName": { "Ref": "KeyName" },
+                "KeyName": { "Ref": "TODO" },
                 "SecurityGroupIds": [
-                    { "Ref": "SecurityGroup" }
+                    { "Ref": "TODO" }
                 ],
-                "SubnetId": { "Ref": "Subnet" }
+                "SubnetId": { "Ref": "TODO" }
             }
+        },
+
+        "Server2": {
+            "TODO": "Create another web server."
+        },
+
+        "ControlNode": {
+            "TODO": "Create a control node with the same specs."
         }
     },
+
     "Outputs": {
-        "PublicName": {
-            "Value": {
-                "Fn::GetAtt": [
-                    "Server",
-                    "PublicDnsName"
-                ]
-            },
-            "Description": "Public name (connect via SSH)"
-        }
+        "InstanceID" : {
+            "Description": "The Instance ID",  
+            "Value" : { "Ref" : "EC2Instance" }
+          }
     }
 }

@@ -14,7 +14,7 @@
 
 Note: 
 - You are not required to have an IDE for programming, but [Visual Studio Code](https://code.visualstudio.com/) is a beginner-friendly, lightweight text editor that is IDE-like when given the appropriate plugins.
-- For Windows OS, it is strongly recommended to have [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install) with Ubuntu installed or alternatively download [Git Bash](https://git-scm.com/).
+- For Windows OS, it is strongly recommended to have [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install) with your preferred Linux distribution installed or alternatively download [Git Bash](https://git-scm.com/).
 
 ## Hello, World!
 
