@@ -10,11 +10,12 @@
 - Access to OCP private cloud
 ```
 
-Reminder, all permissions and access to AWS resources is denied by default. The information below details the management of IAM permissions for this module.
+Reminder, all permissions and access to AWS resources is denied by default. The information below details the implementations of the IAM permissions for this module.
 
 Policies:
-- Group is created from the users of current cohort.
-- Group is given permission to R/W EC2 and S3 tagged resources.
+- Group is created for users (current students).
+- Group is given permission to use the AWS CLi and other programming tools.
+- Group is given permission to tagged resources for R/W EC2 and S3.
 - Group is given permission to READ-only VPC.
 - Group is given permission to use CloudFormation.
 - Group is given permission to AWS Lambda Functions.
@@ -27,35 +28,32 @@ Roles:
 
 ## Working on the Cloud
 
-In this module, students will be working within the OCP private cloud network on ```Amazon Web Services``` and provision resources to host their created web page on a web server. Since this is a private network, a VPN is required for access to these resources. Additionally, the Amazon Linux AMI runs on CentOS which is similar to other Linux distributions
-you may be familiar with such as Ubuntu, but is regarded as more stable and secure in the professional IT world. Unexpected problems may occur and will require consulting online resources or other team members to resolve these issues.
+In this module, students will be working within the OCP private cloud network on ```Amazon Web Services``` and provision resources required for a web hosting service. You are required to have a secured connection between the VPC and your host machine using the provided VPN. 
 
-Outlined below are two tracks: the basic and intermediate track. The basic track serves as an introductory lesson for beginners or as a refresher on cloud concepts within AWS. The intermediate track better represents what is expected from entry-level cloud practitioners and will introduce new concepts and challenges designed to prepare you.
+Outlined below are learning paths: the ```basic track``` and ```intermediate track```. The basic track serves as an introductory material for novices and as warm-up for those familiar with cloud concepts. The intermediate track is a better representation of what is expected from entry-level cloud practitioners and will introduce new concepts and challenges.
 
 ## Working on the Cloud: Console
 
-The basic track will focus on using the AWS console in order to create resources. Each student will individually create their own elastic compute (EC2) instances and manually install the required packages as well as moving objects from and to simple storage service (S3). Students will work together to discuss the implementations of an elastic load balancer (ELB) and verify that they have successfully created a working backend web server.
-
-Beginners should explore the console and understand its layout while those more familiar are recommended to use the [AWS CLI](https://aws.amazon.com/cli/).
+This learning path focuses on utilizing the AWS console to create cloud resources. Each student will be provisioning their own elastic compute (EC2) instance and the required packages as well as managing objects in the simple storage service (S3) without detailed instructions. References will be provided but it is expected that students can resolve any issues without much guidance. Those who are more familiar with cloud concepts are recommended to use the [AWS CLI](https://aws.amazon.com/cli/) for provisioning and managing resources.
 
 **1. Creating and Configuring a Compute Instance**
 
-Login with your AWS IAM account. Since your resources reside on a private cloud, you will need to use a VPN in have access within the network.
+Login with the provided AWS IAM account.
 
-Create a EC2 instance with the default settings along with the following configurations listed below. You can generate a new keypair or use a pre-existing one. View the documentations on [initializing](https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) and [launching](https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) EC2 instances via AWS CLI:
+Create an EC2 instance following configurations listed below and default settings otherwise. View the documentations on [initializing](https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) and [launching](https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) EC2 instances via AWS CLI:
 ```
 - Amazon Linux 2 AMI with t2.micro type
 - TODO: Security Group (port 22 and port 80 open)
 ```
 
-Verify the connection via SSH protocol with the appropriate keypair and then install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) on the VM. This will give permission for your EC2 instance to access the AWS console and perform command lines.
+Verify the connection via SSH protocol and then install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) on the EC2. This will give permission for your EC2 instance to access AWS tools.
 
 Troubleshooting:
 - You cannot SSH from your local machine to a private network without a VPN connection.
 - If your authorized key is not recognized, make sure to specify the entire path such as on Linux: ```~/.ssh/<authorized_key>```.
 
 **2. Connecting to Object Storage**
-Once you have installed AWS CLI onto your VM, you will be uploading / downloading from and to the designated S3 bucket. Review the related-documents on [uploading](https://docs.aws.amazon.com/cli/latest/reference/s3api/put-object.html) and [downloading](https://docs.aws.amazon.com/cli/latest/reference/s3api/get-object.html) to your S3 bucket before proceeding.
+Once you have installed AWS CLI onto your EC2, you will be transferring objects with the designated S3 bucket. Review the documents to use AWS CLI for [uploading](https://docs.aws.amazon.com/cli/latest/reference/s3api/put-object.html) and [downloading](https://docs.aws.amazon.com/cli/latest/reference/s3api/get-object.html) to your S3 bucket.
 
 On your EC2 instance, create a new file called <firstname_lastname>.txt. You will upload this file to your bucket and it should contain the following text:
 ```
@@ -70,23 +68,25 @@ Troubleshooting:
 - Review the basic command lines for Linux file system management if needed.
 
 **3. Configure Web Server**
-Carefully follow the instructions to install an [Apache HTTP web server](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateWebServer.html) and stop once you set the files permission for the Apache web server. Download your HTML file from the S3 bucket onto VM at ```/var/www/html/<file>.html```.
+Carefully follow the instructions to install an [Apache HTTP web server](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateWebServer.html) and stop once you have set the files permission for the Apache web server. Download your HTML file from the S3 bucket onto your EC2 at ```/var/www/html/<file>.html```.
 
-Verify that the web page has been hosted by using the private IP address of your web server.
+Verify that your web server is currently hosting the correct page.
 
 Troubleshooting:
 - You are required to update the permissions within the VM in order to make changes to the contents under the ```var/``` directory.
-- If you cannot connect to your website after finishing installation, ensure that the web address starts with ```http://``` instead of ```https://```. TODO: check if this applies to private network
+- You can access your web page by addressing to the private IP address with any browser.
 
 **4. Load Balancer**
 
-For this step, only one individual is required to create the [ELB](https://aws.amazon.com/elasticloadbalancing/) but discuss with your team members about the implementation details. In order to create an ELB, you will require a target group that contains each VM as the backend server. Once your ELB is running, verify that each student are viewing the different pages created.
+Review the documentations about the [ELB](https://aws.amazon.com/elasticloadbalancing/). While having a single load balancer to manage your backend servers is reasonable, for practicing purposes, each student will implement their own ELB. Create a target group which contains everyone's web servers and verify that the traffic is being distributed.
+
+Troubleshooting:
+- Connecting to your ELB is similar to connecting to your EC2 from a web browser.
+- If a page reload does not update the contents of the web page, check if sticky sessions were enabled or use multiple web browsers.
 
 ## Working on the Cloud: Automation
 
-The intermediate track will focus on resource and configuration mangement of AWS resources via automation. This track will accomplish the same goals as the beginner's track but through efficient methodologies. Initializing several EC2 instances and setting them up manually is incredibly unnecessary and unpractical when the workload is high, so this track will introduce several new concepts on cloud automation. While these tools can manage several resources at a time, students are recommended to manage their own resources independently.
-
-Before proceeding, make sure that all previously created resources have been clear for a more manageable work environment.
+This learning path will similarly create a web hosting server but with more emphasis on resource and configuration management to achieve automation. Students will be responisble for managing more than once resource at a time and all previously created resources should be terminated to have a more manageable work environment.
 
 **1. Resource Management**
 
@@ -94,7 +94,7 @@ Before proceeding, make sure that all previously created resources have been cle
 
 [CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) provides an Infrastructure-as-Code solution by provisioning and managing resources written with a JSON / YAML template. When a template is created and read by CloudFormation, a stack is generated which is a collection of the AWS resources managed as a single unit. Thus, you can modify several resources at once by modifying the stack.
 
-Examine ```template.json``` which provides an example template for creating EC2 instances with the given parameters. There are several ```TODO``` which denotes a missing value and update them with the appropriate value. You will be creating multiple web servers and a control node which will be detailed later. Access CloudFormation from the console and upload the template in order to create a stack. Create the following resources:
+Examine ```server.json``` which provides an example template for creating EC2 instances with the given parameters. There are several ```TODO``` which denotes a missing value and update them with the appropriate value. You will be creating multiple web servers and a control node which will be detailed later. Access CloudFormation from the console and upload the template in order to create a stack. Create the following resources:
 ```
 - Web server 1 compute instance
 - Web server 2 compute instance
