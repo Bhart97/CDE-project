@@ -21,7 +21,6 @@ Policies:
 - Group is given permission to AWS Lambda Functions.
 
 Roles:
-- EC2 instances are given permission to use the AWS CLI.
 - EC2 instances are given permission to communicate with S3 services.
 - Lambda Functions are given permission to SSH into EC2 instances.
 - Lambda Functions are given permission to communicate with S3 services.
@@ -74,7 +73,7 @@ Verify that your web server is currently hosting the correct page.
 
 Troubleshooting:
 - You are required to update the permissions within the VM in order to make changes to the contents under the ```var/``` directory.
-- You can access your web page by addressing to the private IP address with any browser.
+- You can access your web page by addressing to the private IP address with any browser with ```http://<ip_address>```
 
 **4. Load Balancer**
 
@@ -82,7 +81,7 @@ Review the documentations about the [ELB](https://aws.amazon.com/elasticloadbala
 
 Troubleshooting:
 - Connecting to your ELB is similar to connecting to your EC2 from a web browser.
-- If a page reload does not update the contents of the web page, check if sticky sessions were enabled or use multiple web browsers.
+- If a page reload does not update the contents of the web page, clear your cache to resolve this since AWS caches DNS queries.
 
 ## Working on the Cloud: Automation
 
@@ -94,20 +93,43 @@ This learning path will similarly create a web hosting server but with more emph
 
 [CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) provides an Infrastructure-as-Code solution by provisioning and managing resources written with a JSON / YAML template. When a template is created and read by CloudFormation, a stack is generated which is a collection of the AWS resources managed as a single unit. Thus, you can modify several resources at once by modifying the stack.
 
-Examine ```server.json``` which provides an example template for creating EC2 instances with the given parameters. There are several ```TODO``` which denotes a missing value and update them with the appropriate value. You will be creating multiple web servers and a control node which will be detailed later. Access CloudFormation from the console and upload the template in order to create a stack. Create the following resources:
+Examine ```server.json``` which provides an example template for creating EC2 instances with the given parameters. There are several ```TODO``` which denotes a missing value and update them with the appropriate value. You will be creating multiple web servers and a control node which will be detailed later. Access CloudFormation from the console and upload the template in order to create a stack. Modify the ```server.json``` file to create the following resources listed below. Select the default options when creating the stack.
 ```
 - Web server 1 compute instance
 - Web server 2 compute instance
 - Control node compute instance
 ```
 
-TODO: test the template
+TODO: currently assigns public IP address for testing purposes
+- recommendation: assigned with elastic ip address (for public)
 
 **2. Configuration Mangement**
 
 [Ansible](https://docs.ansible.com/ansible/latest/network/getting_started/basic_concepts.html) allows for the deployment of software packages to several compute instances simutaneously. Ansible playbooks, written in YAML format, allows for the orchestration of procedural tasks against an inventory of hosts via the SSH protocol. In this step, you will be deploying Apache web servers to the previously created EC2 instances.
 
-To get started, you will install Ansible on the control node. Follow the instructions on [installing Ansible on CentOS](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installation-guide). Next, read about the [Ansible playbook](https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html) and review ```apache.yaml``` which is a series of tasks to install Apache. Refer to the user guide to make sure that Ansible has been properly set up and includes an inventory of hosts. Run the Ansible playbook and verify that you connect to the test pages for each individual EC2.
+To get started, you will install Ansible on the control node. Install AWS CLI onto the EC2 destinated as the control node. Follow the instructions on [installing Ansible on CentOS](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installation-guide). Next, read about the [Ansible playbook](https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html) and review ```apache.yaml``` which is a series of tasks to install Apache. Refer to the user guide to make sure that Ansible has been properly set up and includes an inventory of hosts. Follow the example and verify that the ```/tmp/ansible_was_here``` was created.
+
+
+Run the Ansible playbook and verify that you connect to the test pages for each individual EC2. Note, the key-value pair ```become: yes``` allows for privilege escalation.
+
+```
+sudo yum install epel-release
+sudo amazon-linux-extras install ansible2
+sudo vim hosts
+generate ssh key on control node
+add public key to server nodes (~/.ssh/authorized_keys)
+sudo mkdir playbook
+sudo -i # get root privileges to edit /var/www/html
+
+touch index.html
+echo "test page" > index.html # note this creates a basic HTML without the header or body
+```
+
+Troubleshooting:
+- Basic VIM commands: press ```insert``` to make changes, ```:w``` to write, ```:q``` to exit.
+- If you cannot ping successfully to all hosts, then manually authenticate the host via the ```ssh``` command.
+- If an error occurs when running the command ```ansible-playbook```, try fixing the indentations.
+- If an elastic IP address has not been assigned, stopping EC2 instances will change the public IP address TODO: remove when using private
 
 **3. Serverless Functions**
 
@@ -119,7 +141,9 @@ TODO
 
 **4. Load Balancer**
 
-Using CloudFormation, create an ELB that is given the necessary parameters to recreate the appropriate HTTP backend web server. Apply the necessary target group and security group.
+Using CloudFormation, create an ELB that is given the necessary parameters to recreate the appropriate HTTP backend web server. update the created target group to include the web servers.
+
+To test if your load balancer is dysfunctional, add your EC2 instances to the pre-created target group and use the pre-configured load balancer
 
 ## End of Module
 

@@ -1,5 +1,6 @@
 ---
 - name: This playbook will set up the httpd web server
+  become: yes
   hosts: all
   tasks:
     - name: Install Apache packages
