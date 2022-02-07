@@ -28,7 +28,7 @@
 		"ApplicationLoadBalancer" : {
 		  "Type" : "AWS::ElasticLoadBalancingV2::LoadBalancer",
 		  "Properties" : {
-			"SecurityGroup" : [{"Ref" : SecurityGroup}],
+			"SecurityGroup" : [{"Ref" : "SecurityGroup"}],
 			"Subnets" : { "Ref" : "Subnets"}
 		  }
 		},

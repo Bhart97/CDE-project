@@ -13,12 +13,12 @@
 Reminder, all permissions and access to AWS resources is denied by default. The information below details the implementations of the IAM permissions for this module.
 
 Policies:
-- Group is created for users (current students).
-- Group is given permission to use the AWS CLi and other programming tools.
-- Group is given permission to tagged resources for R/W EC2 and S3.
+- Group is created for current users.
+- Group is given permission to programmatic tools and AWS CLI.
+- Group is given permission to tagged resources for R/W EC2 and S3?
 - Group is given permission to READ-only VPC.
 - Group is given permission to use CloudFormation.
-- Group is given permission to AWS Lambda Functions.
+- Group is given permission to use AWS Lambda Functions.
 
 Roles:
 - EC2 instances are given permission to communicate with S3 services.
@@ -85,7 +85,7 @@ Troubleshooting:
 
 ## Working on the Cloud: Automation
 
-This learning path will similarly create a web hosting server but with more emphasis on resource and configuration management to achieve automation. Students will be responisble for managing more than once resource at a time and all previously created resources should be terminated to have a more manageable work environment.
+This learning path will similarly create web hosting servers but with more emphasis on resource and configuration management to achieve automation. Students will be responsible for managing more than one resource at a time and all previously created resources should be terminated to have a more manageable work environment.
 
 **1. Resource Management**
 
@@ -93,28 +93,39 @@ This learning path will similarly create a web hosting server but with more emph
 
 [CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) provides an Infrastructure-as-Code solution by provisioning and managing resources written with a JSON / YAML template. When a template is created and read by CloudFormation, a stack is generated which is a collection of the AWS resources managed as a single unit. Thus, you can modify several resources at once by modifying the stack.
 
-Examine ```server.json``` which provides an example template for creating EC2 instances with the given parameters. There are several ```TODO``` which denotes a missing value and update them with the appropriate value. You will be creating multiple web servers and a control node which will be detailed later. Access CloudFormation from the console and upload the template in order to create a stack. Modify the ```server.json``` file to create the following resources listed below. Select the default options when creating the stack.
+Examine ```server.json``` which provides an example template for creating EC2 instances with the given parameters. There are several ```TODO``` which denotes a missing value and update them with the appropriate value. Please refer to the CloudFormation guidelines on getting started and learning more about how format a template.
+
+You will be creating multiple web servers and a control node which will be detailed in the next section. Update the ```server.json``` file to create the following resources below. Access CloudFormation from the console and upload the template to create a stack and choose all default settings.
 ```
 - Web server 1 compute instance
 - Web server 2 compute instance
 - Control node compute instance
 ```
 
-TODO: currently assigns public IP address for testing purposes
-- recommendation: assigned with elastic ip address (for public)
+Verify that you can reach each EC2 instance through a SSH connection.
+
+TODO: current assigns a public IP address in the template. (do not give the public subnet routing to the internet gateway)
+
+Troubleshoot:
+- Common errors can occur due to syntax mistakes.
+- Ensure the the public key matches the private key on your local machine, else delete the stack and choose a working keypair.
+- If connecting within a public subnet, a public IP address must be assigned.
 
 **2. Configuration Mangement**
 
 [Ansible](https://docs.ansible.com/ansible/latest/network/getting_started/basic_concepts.html) allows for the deployment of software packages to several compute instances simutaneously. Ansible playbooks, written in YAML format, allows for the orchestration of procedural tasks against an inventory of hosts via the SSH protocol. In this step, you will be deploying Apache web servers to the previously created EC2 instances.
 
-To get started, you will install Ansible on the control node. Install AWS CLI onto the EC2 destinated as the control node. Follow the instructions on [installing Ansible on CentOS](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installation-guide). Next, read about the [Ansible playbook](https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html) and review ```apache.yaml``` which is a series of tasks to install Apache. Refer to the user guide to make sure that Ansible has been properly set up and includes an inventory of hosts. Follow the example and verify that the ```/tmp/ansible_was_here``` was created.
-
-
-Run the Ansible playbook and verify that you connect to the test pages for each individual EC2. Note, the key-value pair ```become: yes``` allows for privilege escalation.
-
+To get started, you will install Ansible on the control node. Install AWS CLI onto the EC2 destinated as the control node. Please refer to [installation guide for Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installation-guide) for additional details. Run the following command on your control node:
 ```
 sudo yum install epel-release
 sudo amazon-linux-extras install ansible2
+```
+
+Next, read about the [Ansible playbook](https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html). Refer to the user guide on how to properly set up Ansible. Follow the example and verify that the ```/tmp/ansible_was_here``` was created. Please note, modifying the contents under ```etc/ansible``` requires root privilege which will require the ```sudo``` command. Additionally, your control node will require SSH connection to the servers, so generate a keypair and give the servers your public key stored in ```~/.ssh/authorized_keys```.
+
+Verify that ```/temp/ansible_was_here``` has been created in the hosts. Run ```apache.yaml``` to install the Apache HTTP web servers for your instances. Verify that the server is running by visiting the page. Note, the key-value pair ```become: yes``` allows for privilege escalation.
+
+```
 sudo vim hosts
 generate ssh key on control node
 add public key to server nodes (~/.ssh/authorized_keys)
@@ -125,11 +136,17 @@ touch index.html
 echo "test page" > index.html # note this creates a basic HTML without the header or body
 ```
 
+Select one of the servers to be the test server. Connect via SSH and run the following command:
+```
+sudo -i
+```
+This will grant temporary permission to modify ```etc/var/www```. Create an empty HTML file and have it contain any text. You will not require a HTML skeleton for testing purposes. Verify that the page now reflects the text content.
+
 Troubleshooting:
 - Basic VIM commands: press ```insert``` to make changes, ```:w``` to write, ```:q``` to exit.
-- If you cannot ping successfully to all hosts, then manually authenticate the host via the ```ssh``` command.
-- If an error occurs when running the command ```ansible-playbook```, try fixing the indentations.
-- If an elastic IP address has not been assigned, stopping EC2 instances will change the public IP address TODO: remove when using private
+- If you cannot ping successfully to all hosts due to authentication issues, then manually SSH into each EC2 instance from within the control node.
+- If an error occurs when running the command ```ansible-playbook```, try fixing the indentations and white spaces.
+- Use an elastic IP address if you plan on provisioning new instances without having to update the inventory each time as stopped instances will have different public IP addresses when restarted or when provisioning a new stack.
 
 **3. Serverless Functions**
 
@@ -141,12 +158,19 @@ TODO
 
 **4. Load Balancer**
 
-Using CloudFormation, create an ELB that is given the necessary parameters to recreate the appropriate HTTP backend web server. update the created target group to include the web servers.
+Create an ELB using ```elb.json```. This will provision an elastic load balancer, its listener, and a target group. Assign the appriopriate EC2 instances to the target group. Verify that you can reach your backend web servers through the load balancer.
 
-To test if your load balancer is dysfunctional, add your EC2 instances to the pre-created target group and use the pre-configured load balancer
+To test if your load balancer is dysfunctional, add your EC2 instances to the pre-created target group and use the pre-configured load balancer.
+
+Once everyone has finished, update the target group to only contain the HTML pages created in the previous module.
+
+Troubleshooting:
+- Make sure that the ELB has the proper configurations: VPC, subnets, and security group.
+- Make sure that the address starts with http:// to reach your HTTP web server.
+- TODO: use a known working load balancer and update the target group to yours to see if the issues lies with the ELB from the template.
 
 ## End of Module
 
-By the end of this module, you will have successfully created an EC2 instance that can R/W with your S3 bucket, connect into your VM and install Apache Web Server, and have an ELB that distributes incoming traffic to the backend web servers. This work was accomplished either through the console or AWS CLI.
+By the end of this module, through either learning paths, you will have successfully provision compute resources and connect with Object storage, connect and install software packages on your EC2 instances, and create an ELB to distribute traffic across your backend web server.
 
-In the intermediate track, you will have used CloudFormation and understand how Infrastructure-as-Code allows for better resource management while using Ansible for configuration management Finally, how serverless functions allows for event-driven automation of your workflow.
+In the intermediate track, you will have automated your work through the resource manager ```CloudFormation``` and configuration manager ```Ansible```. Additionally, learned how to leverage serverless functions to allow for event-driven automation of your workflow.
