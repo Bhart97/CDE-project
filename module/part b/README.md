@@ -15,8 +15,8 @@ Reminder, all permissions and access to AWS resources is denied by default. The 
 Policies:
 - Group is created for current users.
 - Group is given permission to programmatic tools and AWS CLI.
-- Group is given permission to manage tagged resources for R/W EC2 and S3?
-- Group is given permission to READ-only roles.
+- Group is given permission to manage tagged resources for R/W EC2 and S3.
+- Group is given permission to READ-only IAM and attach roles.
 - Group is given permission to READ-only VPC.
 - Group is given permission to manage CloudFormation.
 - Group is given permission to manage AWS Lambda Functions.

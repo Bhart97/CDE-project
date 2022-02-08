@@ -1,5 +1,5 @@
 /* This JavaScript will handle the DB connections and all HTTPs requests
-   DB schema: cohorts > First Name | Last Name | Cohort | Technical Track | Location | Profile */
+   DB schema: OCP > cohorts > First Name | Last Name | Cohort | Technical Track | Profile */
 
 export class Database {
   mysql;
