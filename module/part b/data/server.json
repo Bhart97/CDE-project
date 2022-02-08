@@ -42,7 +42,7 @@
     },
 
     "Resources": {
-        "Server1": {
+        "WebServer1": {
             "Type": "AWS::EC2::Instance",
             "Properties": {
                 "ImageId": "ami-0a8b4cd432b1c3063",
@@ -57,7 +57,7 @@
             }
         },
 
-        "Server2": {
+        "WebServer2": {
             "TODO": "Create another web server."
         },
 

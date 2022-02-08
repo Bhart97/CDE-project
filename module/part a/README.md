@@ -14,7 +14,7 @@
 
 Note: 
 - You are not required to have an IDE for programming, but [Visual Studio Code](https://code.visualstudio.com/) is a beginner-friendly, lightweight text editor that is IDE-like when given the appropriate plugins.
-- For Windows OS, it is strongly recommended to have [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install) with your preferred Linux distribution installed or alternatively download [Git Bash](https://git-scm.com/).
+- For Windows OS, it is strongly recommended to have [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install) with your preferred Linux distribution installed or alternatively download [Git Bash](https://git-scm.com/) which provides limited command tools.
 
 ## Hello, World!
 
@@ -26,7 +26,7 @@ The majority of this module can be completed through Linux. Please refer to this
 
 Login / create an account. [GitHub](https://docs.github.com/en/get-started/quickstart/hello-world) offers a cloud-based solution to version control and software development. This service allows you to upload your projects to remote repositories as well as streamlining collaboration with others.
 
-Before you can start editing and saving the changes to your project, you will need to authenticate your local machine and associate it with your GitHub account. Open your Linux terminal / Git Bash and modify the following command before running:
+Before you can start editing and saving the changes to your project, you will need to authenticate your local machine and associate it with your GitHub account. Open your Linux terminal / Git Bash and modify the following command which will create a SSH key using the RSA algorithm:
 ```
 ssh-keygen -t rsa -b 4096 -C <your_email@example.com>
 ```
@@ -36,8 +36,8 @@ Save at the default location and enter an optional password. Copy the generated 
 settings > SSH and GPG keys > New SSH key
 ```
 
-Note:
-- For more information on how to setup your Git, refer to this [resource](https://docs.github.com/en/get-started/quickstart/set-up-git)/
+Troubleshooting:
+- For more information on how to setup your Git, refer to this [resource](https://docs.github.com/en/get-started/quickstart/set-up-git).
 - Helpful commands such as ```ls -a```, ```cd <dir>```, and ```cat <file>``` to help identify and read your public key.
 
 **2. Creating a New Repository**
@@ -61,7 +61,7 @@ Within the same directory where you initialized Git, create a new python file ca
 ```
 You can view the example ```hello.py``` to help get started.
 
-Note:
+Troubleshooting:
 - You can edit files on Linux with different text editors such as ```vim <file>``` or ```nano <file>```.
 
 **4. Commiting the Changes**
@@ -78,7 +78,7 @@ When you push the changes to the main branch, you are letting everyone know that
 
 **5. Automation Through Scripting**
 
-Automation is what allows for cloud engineers to become successful in their careers. For this step, you will be creating a Bash script that will automatically run the ```hello.py``` that you have created and store its content within a HTML file called ```<firstname_lastname>.html```. You are not required to understand web programming to complete this step but here is a quick overview: HTML provides the structural component to store data, CSS makes your web page more visually appealing and intuitive, and JavaScript gives functionality to your web page. You need only to concern with [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML).
+Automation is what allows for cloud practitioners to become successful in their careers. For this step, you will be creating a Bash script that will automatically run the ```hello.py``` that you have created and store its content within a HTML file called ```<firstname_lastname>.html```. You are not required to understand web programming to complete this step but here is a quick overview: HTML provides the structural component to store data, CSS makes your web page more visually appealing and intuitive, and JavaScript gives functionality to your web page. You need only to concern with [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML).
 
 Carefully examine ```example.sh``` to understand how to create / modify the necessary HTML file. ```#!/bin/bash``` is the required header in order for a Bash script to run. After creating a Bash script called ```script.sh```, run the following command through either the Linux terminal or Windows Command Prompt:
 ```

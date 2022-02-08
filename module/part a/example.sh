@@ -2,7 +2,6 @@
 
 # creates a new file called "index.html" and stores the following text until it reaches EOF
 # which represents a skeleton HTML
-touch index.html
 cat > index.html << EOF
 <!DOCTYPE html>
 <html lang="en-us">

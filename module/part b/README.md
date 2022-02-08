@@ -7,7 +7,7 @@
 ## Setup
 ```
 - AWS IAM account
-- Access to OCP private cloud
+- Access to OCP's virtual private cloud (VPC)
 ```
 
 Reminder, all permissions and access to AWS resources is denied by default. The information below details the implementations of the IAM permissions for this module.
@@ -15,10 +15,12 @@ Reminder, all permissions and access to AWS resources is denied by default. The 
 Policies:
 - Group is created for current users.
 - Group is given permission to programmatic tools and AWS CLI.
-- Group is given permission to tagged resources for R/W EC2 and S3?
+- Group is given permission to manage tagged resources for R/W EC2 and S3?
+- Group is given permission to READ-only roles.
 - Group is given permission to READ-only VPC.
-- Group is given permission to use CloudFormation.
-- Group is given permission to use AWS Lambda Functions.
+- Group is given permission to manage CloudFormation.
+- Group is given permission to manage AWS Lambda Functions.
+- Group is given permission to manage Amazon RDS.
 
 Roles:
 - EC2 instances are given permission to communicate with S3 services.
@@ -27,44 +29,43 @@ Roles:
 
 ## Working on the Cloud
 
-In this module, students will be working within the OCP private cloud network on ```Amazon Web Services``` and provision resources required for a web hosting service. You are required to have a secured connection between the VPC and your host machine using the provided VPN. 
+In this module, students will be working within the OCP private cloud network on ```Amazon Web Services``` and provision resources required for a web hosting service. A secured connection will be required to access the resources on the private network via the provided VPN.
 
-Outlined below are learning paths: the ```basic track``` and ```intermediate track```. The basic track serves as an introductory material for novices and as warm-up for those familiar with cloud concepts. The intermediate track is a better representation of what is expected from entry-level cloud practitioners and will introduce new concepts and challenges.
+Outlined below are learning paths: the ```basic track``` and ```intermediate track```. The basic track serves as an introductory material for beginners and as warm-up for those familiar with cloud concepts. The intermediate track is a better representation of what is expected from entry-level cloud practitioners and will introduce new concepts and challenges.
 
 ## Working on the Cloud: Console
 
-This learning path focuses on utilizing the AWS console to create cloud resources. Each student will be provisioning their own elastic compute (EC2) instance and the required packages as well as managing objects in the simple storage service (S3) without detailed instructions. References will be provided but it is expected that students can resolve any issues without much guidance. Those who are more familiar with cloud concepts are recommended to use the [AWS CLI](https://aws.amazon.com/cli/) for provisioning and managing resources.
+This learning path focuses on utilizing the AWS console to create cloud resources. Each student will be provisioning their own elastic compute (EC2) instances and the required packages as well as managing objects in the simple storage service (S3). References will be provided to help resolve any troubleshooting issues that may occur. Those who are more familiar with cloud concepts are recommended to use the [AWS CLI](https://aws.amazon.com/cli/) for provisioning and managing resources.
 
 **1. Creating and Configuring a Compute Instance**
 
 Login with the provided AWS IAM account.
 
-Create an EC2 instance following configurations listed below and default settings otherwise. View the documentations on [initializing](https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) and [launching](https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) EC2 instances via AWS CLI:
+Create an EC2 instance following configurations listed below and default settings otherwise. View the documentations on [initializing](https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) and [launching](https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) EC2 instances with the AWS CLI:
 ```
 - Amazon Linux 2 AMI with t2.micro type
-- TODO: Security Group (port 22 and port 80 open)
+- WebServerGroup security group
 ```
 
 Verify the connection via SSH protocol and then install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) on the EC2. This will give permission for your EC2 instance to access AWS tools.
 
 Troubleshooting:
 - You cannot SSH from your local machine to a private network without a VPN connection.
-- If your authorized key is not recognized, make sure to specify the entire path such as on Linux: ```~/.ssh/<authorized_key>```.
+- If the keypair does not authenticate, make sure to specify the entire path such as ```~/.ssh/<private_key>```.
 
 **2. Connecting to Object Storage**
-Once you have installed AWS CLI onto your EC2, you will be transferring objects with the designated S3 bucket. Review the documents to use AWS CLI for [uploading](https://docs.aws.amazon.com/cli/latest/reference/s3api/put-object.html) and [downloading](https://docs.aws.amazon.com/cli/latest/reference/s3api/get-object.html) to your S3 bucket.
+Once you have installed AWS CLI onto your EC2, you will be transferring objects with the designated S3 bucket. Review the documentations on using the [s3 commands](https://docs.aws.amazon.com/cli/latest/reference/s3/) to move files within the S3 bucket.
 
-On your EC2 instance, create a new file called <firstname_lastname>.txt. You will upload this file to your bucket and it should contain the following text:
+Go to the EC2 console and ```Actions > Security > Modify IAM role``` and attach the role to enable EC2 access with S3, then create a new file called <firstname_lastname>.txt from your EC2 instance. You will upload this file to your bucket and it should contain the following text:
 ```
 Hello, my name is <first name> <last name>!
 ```
 
-Verify through the console that the S3 bucket now contains a file called <firstname_lastname>.txt with the appropriate content. Upload your HTML file from the previous module and then download it onto your EC2. Verify that the contents are the same.
+Verify through the console that the S3 bucket now contains a file called <firstname_lastname>.txt with the appropriate text content. Upload your HTML file from the previous module and then download it onto your EC2. Verify that the contents are the same.
 
 Troubleshooting:
 - Be careful on how you specify the path for bucket storage.
-- EC2 instances cannot connect to S3 services without the AWS CLI installed.
-- Review the basic command lines for Linux file system management if needed.
+- EC2 instances cannot connect to S3 services without the AWS CLI installed and the instance role attached.
 
 **3. Configure Web Server**
 Carefully follow the instructions to install an [Apache HTTP web server](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateWebServer.html) and stop once you have set the files permission for the Apache web server. Download your HTML file from the S3 bucket onto your EC2 at ```/var/www/html/<file>.html```.
