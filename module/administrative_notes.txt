@@ -1,6 +1,7 @@
 TODO:
-[ ] update the guidelines based on VPN implementation / alternatives
-[ ] update lambda functions to shut down resources
+[ ] Update the guidelines based on VPN implementation / alternatives
+[ ] Autoscaling module
+[ ] Events and notifications
 
 List of pre-configured resources:
 IAM accounts
@@ -8,3 +9,6 @@ VPC
 Security group for web servers
 S3 bucket (each cohort will have their own folder)
 Roles -> EC2 R/W with S3, Lambda can manage CloudFormation + log to cloudwatch + manage EC2
+
+Topics to explore:
+[ ] Autoscaling module

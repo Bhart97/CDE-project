@@ -7,29 +7,32 @@
 ## Setup
 ```
 - AWS IAM account (access key ID and secret access key)
-- Access to OCP's virtual private cloud (VPC)
+- OCP's virtual private cloud (VPC)
 - <Region>
 ```
 
 Reminder, all permissions and access to AWS resources is denied by default. The information below details the implementations of the IAM permissions for this module.
 
+```
 Policies:
 - Users are created with access to programmatic tools and the AWS CLI.
 - Group is created for current users.
 - Group is given permission to access AWS CloudShell.
-- Group is given permission to manage tagged resources for R/W EC2 and S3.
-- Group is given permission to READ-only IAM and attach / create roles.
+
+- Group is given permission to manage EC2 and S3.
+- Group is given permission to READ-only IAM and attach roles.
 - Group is given permission to READ-only VPC.
 
 - Group is given permission to manage CloudFormation.
 - Group is given permission to manage AWS Lambda Functions.
-- Group is given permission to manage Event Bridge
+- Group is given permission to manage Event Bridge.
 
 - Group is given permission to manage Amazon RDS.
 
 Roles:
 - EC2 instances are given permission to communicate with S3 services.
-- Lambda Functions are given permission delete CloudFormation stacks.
+- Lambda Functions are given permission delete EC2 resources and CloudFormation stacks.
+```
 
 ## Working on the Cloud
 
@@ -41,13 +44,13 @@ Outlined below are learning paths: the ```basic track``` and ```intermediate tra
 
 This learning path focuses on utilizing the AWS console to create cloud resources. Each student will be provisioning their own elastic compute (EC2) instances and the required packages as well as managing objects in the simple storage service (S3). References will be provided to help resolve any troubleshooting issues that may occur but are encouraged to explore and make mistakes.
 
-Those who are more familiar with cloud concepts are suggested to use the [AWS CloudShell](https://aws.amazon.com/cloudshell/) for provisioning and managing resources. Note, you will also being using the [AWS CLI](https://aws.amazon.com/cli/) so it is recommended to become familiar with the AWS tools, regardless.
+Those who are more familiar with cloud concepts are suggested to use the [AWS CloudShell](https://aws.amazon.com/cloudshell/) for provisioning and managing resources. Note, you will also being using the [AWS CLI](https://aws.amazon.com/cli/) on your EC2 instances so it is recommended to become familiar with the AWS tools anyways. If planning on using your Linux terminal on your local machine, your access key ID and secret access key credentials must be requested.
 
 **1. Creating and Configuring a Compute Instance**
 
-Login with the provided AWS IAM account.
+Login with the provided AWS IAM account. Upload an [existing keypair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws) from your local machine if planning on using the CloudShell. Note, it is recommended to create a new dedicated keypair with an identifable key name so that it is interchangeable with your local machine and CloudShell.
 
-Create an EC2 instance following configurations listed below and default settings otherwise. View the documentations on [initializing](https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) and [launching](https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) EC2 instances with the AWS CLI:
+Create an EC2 instance with the following configurations listed below and default settings otherwise. View the documentations on [initializing](https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) and [launching](https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) EC2 instances with the AWS CloudShell:
 ```
 - Amazon Linux 2 AMI with t2.micro type
 - WebServerGroup security group
@@ -60,21 +63,23 @@ Troubleshooting:
 - You can name your compute instances to make them much easier to manage.
 - If you cannot SSH from to the remote machine, you either need to assign a public IP address or use a VPN connection for the private IP address.
 - If the keypair does not authenticate, make sure to specify the entire path such as ```~/.ssh/<private_key>```.
+- You are bound to encounter many issues involving your keypair so it is important to be consistent and renaming if necessary for clarity.
 
 **2. Connecting to Object Storage**
 
-Within the S3 bucket called <TODO>, all objects will be stored under your cohort directory with your name such as ```s3://<bucket_name>/<cohort>/<name>/```. You will be using the AWS CLI from within the EC2 instance to make calls to the S3 bucket. Review the documentations on using the [s3 commands](https://docs.aws.amazon.com/cli/latest/reference/s3/) to move files within the S3 bucket.
+Within the S3 bucket called <TODO>, all objects will be stored under your cohort directory with your name such as ```s3://<bucket_name>/<cohort>/```. You will be using the AWS CLI from within the EC2 instance to make calls to the S3 bucket. Review the documentations on using the [s3 commands](https://docs.aws.amazon.com/cli/latest/reference/s3/) to move files within the S3 bucket.
 
-Go to the EC2 console and ```Actions > Security > Modify IAM role``` and attach the role to enable EC2 access with S3, then create a new file called <firstname_lastname>.txt from your EC2 instance. You will upload this file to your individual folder and it should contain the following text:
+Go to the EC2 console and ```Actions > Security > Modify IAM role``` and attach the role to enable EC2 access with S3, then create a new file called <firstname_lastname>.txt from your EC2 instance. You will upload this file under the appropriate directory and it should contain the following text:
 ```
 Hello, my name is <first name> <last name>!
 ```
 
-Verify through the console that the S3 bucket now contains a file called <firstname_lastname>.txt with the appropriate text content. Upload your HTML file from the previous module either through the CloudShell or Console, then download it onto your EC2. Verify that the contents are the same.
+Verify through the console that the S3 bucket now contains a file called <firstname_lastname>.txt with the text content. Upload your HTML file from the previous module either through the CloudShell or console, then download it onto your EC2. Verify that the contents are the same.
 
 Troubleshooting:
-- If the cohort directory has not been created, create one or contact the administrators. The same applies if your own individual folder is not created.
-- Be careful on how you specify the path for bucket storage ```S3://<bucket_name>/<dir>/object```.
+- If the cohort directory has not been created, then create one.
+- Be careful on how you specify the path for the bucket ```S3://<bucket_name>/<dir>/object```.
+- s3 commands are limited to interacting with objects and cannot modify folders.
 - EC2 instances cannot connect to S3 services without the AWS CLI installed and the instance role attached.
 
 **3. Configure Web Server**
@@ -103,13 +108,13 @@ Troubleshooting:
 
 **5. End of the Basic Track**
 
-By the end of this learning, you will have successfully provisioned a compute resource and managed objects with the S3 bucket, connect and install software packages on your EC2 instances, and created an ELB to distribute traffic across your backend web servers.
+By the end of this learning path, you will have successfully provisioned a compute resource and managed objects with the S3 bucket, connect and install software packages on your EC2 instances, and created an ELB to distribute traffic across your backend web servers.
 
 **REQUIRED:** _Terminate_ all resources that you have created for this module: EC2 instances, target group, and ELB.
 
 ## Working on the Cloud: Automation (Intermediate)
 
-This learning path will similarly create web hosting servers but with more emphasis on resource and configuration management to achieve automation. Students will be responsible for managing more than one resource at a time and all previously created resources should be terminated before moving forward.
+This learning path will similarly create web hosting servers but with more emphasis on resource and configuration management to achieve automation and managing at scale. Students will be responsible for managing more than one resource at a time and all previously created resources should be terminated before moving forward.
 
 **1. Resource Management**
 
@@ -132,7 +137,6 @@ Verify that you can reach each EC2 instance through a SSH connection.
 
 Troubleshoot:
 - Common errors can occur due to syntax mistakes.
-- Ensure the the public key matches the private key on your local machine, else delete the stack and choose a functional keypair.
 
 **2. Configuration Mangement**
 
@@ -144,7 +148,7 @@ sudo yum install epel-release
 sudo amazon-linux-extras install ansible2
 ```
 
-Next, read about the [Ansible playbook](https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html). Refer to the user guide on how to properly set up Ansible. Follow the example and verify that the ```/tmp/ansible_was_here``` was created. Please note, modifying the contents under ```etc/ansible``` requires root privilege which will require ```sudo <command>```. Additionally, your control node will require SSH connection to the servers, so generate a keypair and update the hosts' public key storage under ```~/.ssh/authorized_keys```.
+Next, read about the [Ansible playbook](https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html). Refer to the user guide on how to properly set up Ansible. Follow the example and verify that the ```/tmp/ansible_was_here``` was created. Please note, modifying the contents under ```/etc/ansible``` requires root privilege which will require ```sudo <command>```. Additionally, your control node will require SSH connection to the servers, so generate a keypair and update the hosts' public key storage under ```~/.ssh/authorized_keys```.
 
 Run ```apache.yaml``` to install the Apache HTTP web servers for your instances. Verify that the server is running by visiting the page. Note, the key-value pair ```become: yes``` allows for privilege escalation when installing software packages remotely.
 
@@ -156,7 +160,7 @@ Troubleshooting:
 - Basic VIM commands: press ```insert``` to make changes, ```:w``` to write, ```:q``` to exit.
 - If you cannot ping successfully to all hosts due to authentication issues, then manually SSH into each EC2 instance from within the control node.
 - If an error occurs when running the command ```ansible-playbook```, try fixing any indentations and white spaces.
-- If you happen to stop your EC2 instance that is using a public IP address, then it will be changed when restarted.
+- If you happen to stop your EC2 instance that is using a public IP address, then it will be changed when restarted which may affect your inventory.
 
 **3. Load Balancer**
 
@@ -168,32 +172,18 @@ Troubleshooting:
 
 **4. Serverless Functions**
 
-[AWS Lambda](https://aws.amazon.com/lambda/) enables serverless functions allow you to run code with provisioning or managing infrastructure and allows you to automatically respond to events. FOr this section, you will be creating a function that will delete your CloudFormation stack when your control node has been stopped.
+[AWS Lambda](https://aws.amazon.com/lambda/) enables you to call serverless functions which will run without provisioning infrastructure. You can assign the Lambda Function as an endpoint that events and other notifications services can access. For this section, you will be creating a function that when an ```EC2 stop event``` occurs, your function will be called to delete all your provisioned resources.
 
-Using the console, 
-Start by creating a AWS Lambda function in ```Python```. Then 
+Using the console, create a AWS Lambda function in ```Python```. Go to the [Event Bridge](https://aws.amazon.com/eventbridge/) on the console and create a new rule with the following conditions: ```Event pattern > event matching pattern > pre-defined pattern > AWS > EC2 > state-change notification > stopped > "instance id of control node"```. This will send an event notification when your control node has been stopped.
 
+Add the trigger to your Lambda Function and update the template code ```lambda_function.py```. This template code will allow for your Lambda Function to delete the CloudFormation stack specified. Create a test case using the event pattern from the rule created. Deploy your code and verify that _stopping_ your control node will also terminate your CloudFormation resources.
 
-```
-- create lambda with the default settings (node.js)
-- go to event bridge and create rule: event pattern > event matching pattern > pre-defined pattern > service provider AWS > service EC2 > state-change notification > stopped > control node instance id
-- add trigger to lambda
-```
-
-- clean up: delete lambda and event
-
-
-create function, choose the proper role, 
-- requires READ-only role with S3
-- requires SSH permission to EC2
-
-TODO
-- Lambda will require SSH permission to EC2
-- Alternative solution, use API gateway that will receive a HTTP request and trigger
+Troubleshooting:
+- You can modify the code to explicitly state any conditions for debugging purposes.
+- The template function does not necessarily require the event request body so the event triggered is solely dependent on if the control node had been stopped and the test case simply checks for syntax errors.
 
 **5. End of the Intermediate Track**
 
-**REQUIRED:** Create a Lambda function that will _terminate_ all resources that you have created for this module: EC2 instances, target group, and ELB (can ignore contents in the S3 bucket).
-CLean up
+**REQUIRED:** _Terminate_ any remaining provisioned resources such as the serverless function and event rule.
 
-In the intermediate track, you will have automated your work through the resource manager ```CloudFormation``` and configuration manager ```Ansible```. Additionally, learned how to leverage serverless functions to allow for event-driven automation of your workflow.
+By the end of this learning, you will have automated your work through the resource manager ```CloudFormation``` to provision resources and configuration manager ```Ansible``` to deploy software packages. Finally, you have created an event rule to trigger a serverless function and allow for event-driven automation of your work.
