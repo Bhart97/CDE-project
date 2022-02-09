@@ -1,0 +1,1 @@
+# this template script will terminate all resources

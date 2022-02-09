@@ -37,7 +37,7 @@ Outlined below are learning paths: the ```basic track``` and ```intermediate tra
 
 This learning path focuses on utilizing the AWS console to create cloud resources. Each student will be provisioning their own elastic compute (EC2) instances and the required packages as well as managing objects in the simple storage service (S3). References will be provided to help resolve any troubleshooting issues that may occur but are encouraged to explore and make mistakes.
 
-Those who are more familiar with cloud concepts are suggested to use the [AWS CloudShell](https://aws.amazon.com/cloudshell/) for provisioning and managing resources. Note, you will also being using the [AWS CLI](https://aws.amazon.com/cli/) so it is recommended to become familiar with the AWS tools.
+Those who are more familiar with cloud concepts are suggested to use the [AWS CloudShell](https://aws.amazon.com/cloudshell/) for provisioning and managing resources. Note, you will also being using the [AWS CLI](https://aws.amazon.com/cli/) so it is recommended to become familiar with the AWS tools, regardless.
 
 **1. Creating and Configuring a Compute Instance**
 
@@ -53,7 +53,7 @@ Verify the connection via SSH protocol and then install the [AWS CLI](https://do
 
 Troubleshooting:
 - You can name your compute instances to make them much easier to manage.
-- You cannot SSH from your local machine to a private network without a VPN connection (ignore if not using VPN connection).
+- If you cannot SSH from to the remote machine, you either need to assign a public IP address or use a VPN connection for the private IP address.
 - If the keypair does not authenticate, make sure to specify the entire path such as ```~/.ssh/<private_key>```.
 
 **2. Connecting to Object Storage**
@@ -84,7 +84,13 @@ Troubleshooting:
 
 **4. Load Balancer**
 
-Review the documentations about the [ELB](https://aws.amazon.com/elasticloadbalancing/). Create a target group and select all the web servers that are currently available (you can always update the target group). Verify that the traffic to your backend web servers are being distributed.
+Review the documentations about the [ELB](https://aws.amazon.com/elasticloadbalancing/). Create a target group and select any web servers that are currently available (adding a backend that is not currently running Apache may unexpected errors). Create the ELB with the default settings and the following configurations:
+```
+WebServerGroup security group
+HTTP port 80 forwarding to selected target group
+```
+
+Verify that the traffic to your backend web servers are being distributed.
 
 Troubleshooting:
 - Connecting to your ELB is similar to connecting to your EC2 from a web browser.
@@ -94,11 +100,11 @@ Troubleshooting:
 
 By the end of this learning, you will have successfully provisioned a compute resource and managed objects with the S3 bucket, connect and install software packages on your EC2 instances, and created an ELB to distribute traffic across your backend web servers.
 
-**REQUIRED:** _Terminate_ all compute resources that you have created: EC2 instances and ELB.
+**REQUIRED:** _Terminate_ all resources that you have created for this module: EC2 instances, target group, and ELB (can ignore contents in the S3 bucket).
 
 ## Working on the Cloud: Automation (Intermediate)
 
-This learning path will similarly create web hosting servers but with more emphasis on resource and configuration management to achieve automation. Students will be responsible for managing more than one resource at a time and all previously created resources should be terminated to have a more manageable work environment.
+This learning path will similarly create web hosting servers but with more emphasis on resource and configuration management to achieve automation. Students will be responsible for managing more than one resource at a time and all previously created resources should be terminated before moving forward.
 
 **1. Resource Management**
 
@@ -117,12 +123,11 @@ You will be creating multiple web servers and a control node which will be detai
 
 Verify that you can reach each EC2 instance through a SSH connection.
 
-WARNING: currently assigns to a public IP address in the template
+**WARNING:** the current version (2/8/2021) of this template automatically assigns a public IP address and may be deprecated in the future.
 
 Troubleshoot:
 - Common errors can occur due to syntax mistakes.
-- Ensure the the public key matches the private key on your local machine, else delete the stack and choose a working keypair.
-- If connecting within a public subnet, a public IP address must be assigned.
+- Ensure the the public key matches the private key on your local machine, else delete the stack and choose a functional keypair.
 
 **2. Configuration Mangement**
 
@@ -134,31 +139,16 @@ sudo yum install epel-release
 sudo amazon-linux-extras install ansible2
 ```
 
-Next, read about the [Ansible playbook](https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html). Refer to the user guide on how to properly set up Ansible. Follow the example and verify that the ```/tmp/ansible_was_here``` was created. Please note, modifying the contents under ```etc/ansible``` requires root privilege which will require the ```sudo``` command. Additionally, your control node will require SSH connection to the servers, so generate a keypair and give the servers your public key stored in ```~/.ssh/authorized_keys```.
+Next, read about the [Ansible playbook](https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html). Refer to the user guide on how to properly set up Ansible. Follow the example and verify that the ```/tmp/ansible_was_here``` was created. Please note, modifying the contents under ```etc/ansible``` requires root privilege which will require ```sudo <command>```. Additionally, your control node will require SSH connection to the servers, so generate a keypair and update the hosts' public key storage under ```~/.ssh/authorized_keys```.
 
-Verify that ```/temp/ansible_was_here``` has been created in the hosts. Run ```apache.yaml``` to install the Apache HTTP web servers for your instances. Verify that the server is running by visiting the page. Note, the key-value pair ```become: yes``` allows for privilege escalation.
+Verify that ```/temp/ansible_was_here``` has been created in the hosts. Run ```apache.yaml``` to install the Apache HTTP web servers for your instances. Verify that the server is running by visiting the page. Note, the key-value pair ```become: yes``` allows for privilege escalation when installing software packages remotely.
 
-```
-sudo vim hosts
-generate ssh key on control node
-add public key to server nodes (~/.ssh/authorized_keys)
-sudo mkdir playbook
-sudo -i # get root privileges to edit /var/www/html
-
-touch index.html
-echo "test page" > index.html # note this creates a basic HTML without the header or body
-```
-
-Select one of the servers to be the test server. Connect via SSH and run the following command:
-```
-sudo -i
-```
-This will grant temporary permission to modify ```etc/var/www```. Create an empty HTML file and have it contain any text. You will not require a HTML skeleton for testing purposes. Verify that the page now reflects the text content.
+Select one of the servers to be the test server. Connect via SSH and escalate your permissions with ```sudo -i```. This will grant temporary permission to modify ```/var/www/```. Create an empty HTML file and have it contain any desired text. You will not require a HTML skeleton for testing purposes. Verify that the page now reflects the text content.
 
 Troubleshooting:
 - Basic VIM commands: press ```insert``` to make changes, ```:w``` to write, ```:q``` to exit.
 - If you cannot ping successfully to all hosts due to authentication issues, then manually SSH into each EC2 instance from within the control node.
-- If an error occurs when running the command ```ansible-playbook```, try fixing the indentations and white spaces.
+- If an error occurs when running the command ```ansible-playbook```, try fixing any indentations and white spaces.
 - Use an elastic IP address if you plan on provisioning new instances without having to update the inventory each time as stopped instances will have different public IP addresses when restarted or when provisioning a new stack.
 
 **3. Serverless Functions**
@@ -173,15 +163,12 @@ TODO
 
 Create an ELB using ```elb.json```. This will provision an elastic load balancer, its listener, and a target group. Assign the appriopriate EC2 instances to the target group. Verify that you can reach your backend web servers through the load balancer.
 
-To test if your load balancer is dysfunctional, add your EC2 instances to the pre-created target group and use the pre-configured load balancer.
-
-Once everyone has finished, update the target group to only contain the HTML pages created in the previous module.
-
 Troubleshooting:
 - Make sure that the ELB has the proper configurations: VPC, subnets, and security group.
 - Make sure that the address starts with http:// to reach your HTTP web server.
-- TODO: use a known working load balancer and update the target group to yours to see if the issues lies with the ELB from the template.
 
 **5. End of the Intermediate Track**
+
+**REQUIRED:** Create a Lambda function that will _terminate_ all resources that you have created for this module: EC2 instances, target group, and ELB (can ignore contents in the S3 bucket).
 
 In the intermediate track, you will have automated your work through the resource manager ```CloudFormation``` and configuration manager ```Ansible```. Additionally, learned how to leverage serverless functions to allow for event-driven automation of your workflow.

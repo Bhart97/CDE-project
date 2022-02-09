@@ -1,24 +1,9 @@
-CDE project review:
+TODO:
+[ ] update the guidelines based on VPN implementation / alternatives
+[ ] update lambda functions to shut down resources
 
-part b:
-
-
-- basic: take HTML and create s3 bucket, create EC2 instance, create IAM role for lambda function to s3 bucket and ec2 instance
--- ssh into VM and take screenshot of HTML
--- compute, storage, functions, and IAM
-
-- advanced: write a script that does all of that (cloudformations script), console can be used for lambda
-
-- apache webserver. api gateway between s3 and lambda function.
-- free tier services, lambda is free for usage. account per cohort
-
-part c:
-- NoSQL and DynamoDB?
-- Aura db and host
-- Cohort index file, each cohort can modify
-- part c group project, create a script and update the db
-- dynamically update rather than edit the js
-- implement changelog
-
-- apititude and how do you adapt to changes 
-- create Optimum GitHub aacount
+List of pre-configured resources:
+IAM accounts
+VPC
+Security group for web servers
+S3 bucket (each cohort will have their own folder)
