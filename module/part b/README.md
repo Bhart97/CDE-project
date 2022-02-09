@@ -13,8 +13,8 @@
 Reminder, all permissions and access to AWS resources is denied by default. The information below details the implementations of the IAM permissions for this module.
 
 Policies:
+- Users are created with access to programmatic tools and the AWS CLI.
 - Group is created for current users.
-- Group is given permission to programmatic tools and AWS CLI.
 - Group is given permission to manage tagged resources for R/W EC2 and S3.
 - Group is given permission to READ-only IAM and attach roles.
 - Group is given permission to READ-only VPC.
@@ -58,9 +58,9 @@ Troubleshooting:
 
 **2. Connecting to Object Storage**
 
-Within the S3 bucket called <TODO>, all objects will be stored under your cohort directory. You will be using the AWS CLI from within the EC2 instance to make calls to the S3 bucket. Review the documentations on using the [s3 commands](https://docs.aws.amazon.com/cli/latest/reference/s3/) to move files within the S3 bucket.
+Within the S3 bucket called <TODO>, all objects will be stored under your cohort directory with your name such as ```s3://<bucket_name>/<cohort>/<name>/```. You will be using the AWS CLI from within the EC2 instance to make calls to the S3 bucket. Review the documentations on using the [s3 commands](https://docs.aws.amazon.com/cli/latest/reference/s3/) to move files within the S3 bucket.
 
-Go to the EC2 console and ```Actions > Security > Modify IAM role``` and attach the role to enable EC2 access with S3, then create a new file called <firstname_lastname>.txt from your EC2 instance. You will upload this file to your bucket and it should contain the following text:
+Go to the EC2 console and ```Actions > Security > Modify IAM role``` and attach the role to enable EC2 access with S3, then create a new file called <firstname_lastname>.txt from your EC2 instance. You will upload this file to your individual folder and it should contain the following text:
 ```
 Hello, my name is <first name> <last name>!
 ```
@@ -68,7 +68,7 @@ Hello, my name is <first name> <last name>!
 Verify through the console that the S3 bucket now contains a file called <firstname_lastname>.txt with the appropriate text content. Upload your HTML file from the previous module either through the CloudShell or Console, then download it onto your EC2. Verify that the contents are the same.
 
 Troubleshooting:
-- If the cohort directory has not been created, create one or contact the administrators.
+- If the cohort directory has not been created, create one or contact the administrators. The same applies if your own individual folder is not created.
 - Be careful on how you specify the path for bucket storage ```S3://<bucket_name>/<dir>/object```.
 - EC2 instances cannot connect to S3 services without the AWS CLI installed and the instance role attached.
 
@@ -100,7 +100,7 @@ Troubleshooting:
 
 By the end of this learning, you will have successfully provisioned a compute resource and managed objects with the S3 bucket, connect and install software packages on your EC2 instances, and created an ELB to distribute traffic across your backend web servers.
 
-**REQUIRED:** _Terminate_ all resources that you have created for this module: EC2 instances, target group, and ELB (can ignore contents in the S3 bucket).
+**REQUIRED:** _Terminate_ all resources that you have created for this module: EC2 instances, target group, ELB, and HTML file.
 
 ## Working on the Cloud: Automation (Intermediate)
 
@@ -141,7 +141,7 @@ sudo amazon-linux-extras install ansible2
 
 Next, read about the [Ansible playbook](https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html). Refer to the user guide on how to properly set up Ansible. Follow the example and verify that the ```/tmp/ansible_was_here``` was created. Please note, modifying the contents under ```etc/ansible``` requires root privilege which will require ```sudo <command>```. Additionally, your control node will require SSH connection to the servers, so generate a keypair and update the hosts' public key storage under ```~/.ssh/authorized_keys```.
 
-Verify that ```/temp/ansible_was_here``` has been created in the hosts. Run ```apache.yaml``` to install the Apache HTTP web servers for your instances. Verify that the server is running by visiting the page. Note, the key-value pair ```become: yes``` allows for privilege escalation when installing software packages remotely.
+Run ```apache.yaml``` to install the Apache HTTP web servers for your instances. Verify that the server is running by visiting the page. Note, the key-value pair ```become: yes``` allows for privilege escalation when installing software packages remotely.
 
 Select one of the servers to be the test server. Connect via SSH and escalate your permissions with ```sudo -i```. This will grant temporary permission to modify ```/var/www/```. Create an empty HTML file and have it contain any desired text. You will not require a HTML skeleton for testing purposes. Verify that the page now reflects the text content.
 
@@ -154,6 +154,10 @@ Troubleshooting:
 **3. Serverless Functions**
 
 [AWS Lambda](https://aws.amazon.com/lambda/) enables serverless functions allow you to run code with provisioning or managing infrastructure and allows you to automatically respond to events. You create a function such that whenever the S3 bucket gets updated, it will SSH automatically into your EC2 instances and pull that object. While this is not very practical, it is increase your exposure to automation with AWS Lambda.
+
+create function, choose the proper role, 
+- requires READ-only role with S3
+- requires SSH permission to EC2
 
 TODO
 - Lambda will require SSH permission to EC2
