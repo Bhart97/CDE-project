@@ -6,8 +6,9 @@
 
 ## Setup
 ```
-- AWS IAM account
+- AWS IAM account (access key ID and secret access key)
 - Access to OCP's virtual private cloud (VPC)
+- <Region>
 ```
 
 Reminder, all permissions and access to AWS resources is denied by default. The information below details the implementations of the IAM permissions for this module.
@@ -15,23 +16,26 @@ Reminder, all permissions and access to AWS resources is denied by default. The 
 Policies:
 - Users are created with access to programmatic tools and the AWS CLI.
 - Group is created for current users.
+- Group is given permission to access AWS CloudShell.
 - Group is given permission to manage tagged resources for R/W EC2 and S3.
-- Group is given permission to READ-only IAM and attach roles.
+- Group is given permission to READ-only IAM and attach / create roles.
 - Group is given permission to READ-only VPC.
+
 - Group is given permission to manage CloudFormation.
 - Group is given permission to manage AWS Lambda Functions.
+- Group is given permission to manage Event Bridge
+
 - Group is given permission to manage Amazon RDS.
 
 Roles:
 - EC2 instances are given permission to communicate with S3 services.
-- Lambda Functions are given permission to SSH into EC2 instances.
-- Lambda Functions are given permission to communicate with S3 services.
+- Lambda Functions are given permission delete CloudFormation stacks.
 
 ## Working on the Cloud
 
 In this module, students will be working within the OCP private cloud network on ```Amazon Web Services``` and provision resources required for a web hosting service. A secured connection will be required to access the resources on the private network via the provided VPN.
 
-Outlined below are learning paths: the ```basic track``` and ```intermediate track```. The basic track serves as an introductory material for beginners and as warm-up for those familiar with cloud concepts. The intermediate track is a better representation of what is expected from entry-level cloud practitioners and will introduce new concepts and challenges. If you plan on skipping ahead to the intermediate track, please review the basic track which covers some administrative details.
+Outlined below are learning paths: the ```basic track``` and ```intermediate track```. The basic track serves as an introductory material for beginners and as warm-up for those familiar with cloud concepts. The intermediate track is a better representation of what is expected from entry-level cloud practitioners and will introduce new concepts and challenges. If you plan on skipping ahead to the intermediate track, please review the basic track which covers some administrative details and required set ups.
 
 ## Working on the Cloud: Console (Basic)
 
@@ -52,6 +56,7 @@ Create an EC2 instance following configurations listed below and default setting
 Verify the connection via SSH protocol and then install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) on the EC2. This will give permission for your EC2 instance to access AWS tools.
 
 Troubleshooting:
+- Please refer to the console to get the proper ID for the parameters if using the CloudShell.
 - You can name your compute instances to make them much easier to manage.
 - If you cannot SSH from to the remote machine, you either need to assign a public IP address or use a VPN connection for the private IP address.
 - If the keypair does not authenticate, make sure to specify the entire path such as ```~/.ssh/<private_key>```.
@@ -100,7 +105,7 @@ Troubleshooting:
 
 By the end of this learning, you will have successfully provisioned a compute resource and managed objects with the S3 bucket, connect and install software packages on your EC2 instances, and created an ELB to distribute traffic across your backend web servers.
 
-**REQUIRED:** _Terminate_ all resources that you have created for this module: EC2 instances, target group, ELB, and HTML file.
+**REQUIRED:** _Terminate_ all resources that you have created for this module: EC2 instances, target group, and ELB.
 
 ## Working on the Cloud: Automation (Intermediate)
 
@@ -145,15 +150,38 @@ Run ```apache.yaml``` to install the Apache HTTP web servers for your instances.
 
 Select one of the servers to be the test server. Connect via SSH and escalate your permissions with ```sudo -i```. This will grant temporary permission to modify ```/var/www/```. Create an empty HTML file and have it contain any desired text. You will not require a HTML skeleton for testing purposes. Verify that the page now reflects the text content.
 
+Do the same but this time download your HTML file through any means to the other web server. Verify that the page now reflects your HTML.
+
 Troubleshooting:
 - Basic VIM commands: press ```insert``` to make changes, ```:w``` to write, ```:q``` to exit.
 - If you cannot ping successfully to all hosts due to authentication issues, then manually SSH into each EC2 instance from within the control node.
 - If an error occurs when running the command ```ansible-playbook```, try fixing any indentations and white spaces.
-- Use an elastic IP address if you plan on provisioning new instances without having to update the inventory each time as stopped instances will have different public IP addresses when restarted or when provisioning a new stack.
+- If you happen to stop your EC2 instance that is using a public IP address, then it will be changed when restarted.
 
-**3. Serverless Functions**
+**3. Load Balancer**
 
-[AWS Lambda](https://aws.amazon.com/lambda/) enables serverless functions allow you to run code with provisioning or managing infrastructure and allows you to automatically respond to events. You create a function such that whenever the S3 bucket gets updated, it will SSH automatically into your EC2 instances and pull that object. While this is not very practical, it is increase your exposure to automation with AWS Lambda.
+Create an ELB using ```elb.json```. This will provision an elastic load balancer, its listener, and a target group. Assign the appriopriate EC2 instances to the target group. Verify that you can reach your backend web servers through the load balancer.
+
+Troubleshooting:
+- Make sure that the ELB has the proper configurations: VPC, subnets, and security group.
+- Make sure that the address starts with http:// to reach your HTTP web server.
+
+**4. Serverless Functions**
+
+[AWS Lambda](https://aws.amazon.com/lambda/) enables serverless functions allow you to run code with provisioning or managing infrastructure and allows you to automatically respond to events. FOr this section, you will be creating a function that will delete your CloudFormation stack when your control node has been stopped.
+
+Using the console, 
+Start by creating a AWS Lambda function in ```Python```. Then 
+
+
+```
+- create lambda with the default settings (node.js)
+- go to event bridge and create rule: event pattern > event matching pattern > pre-defined pattern > service provider AWS > service EC2 > state-change notification > stopped > control node instance id
+- add trigger to lambda
+```
+
+- clean up: delete lambda and event
+
 
 create function, choose the proper role, 
 - requires READ-only role with S3
@@ -163,16 +191,9 @@ TODO
 - Lambda will require SSH permission to EC2
 - Alternative solution, use API gateway that will receive a HTTP request and trigger
 
-**4. Load Balancer**
-
-Create an ELB using ```elb.json```. This will provision an elastic load balancer, its listener, and a target group. Assign the appriopriate EC2 instances to the target group. Verify that you can reach your backend web servers through the load balancer.
-
-Troubleshooting:
-- Make sure that the ELB has the proper configurations: VPC, subnets, and security group.
-- Make sure that the address starts with http:// to reach your HTTP web server.
-
 **5. End of the Intermediate Track**
 
 **REQUIRED:** Create a Lambda function that will _terminate_ all resources that you have created for this module: EC2 instances, target group, and ELB (can ignore contents in the S3 bucket).
+CLean up
 
 In the intermediate track, you will have automated your work through the resource manager ```CloudFormation``` and configuration manager ```Ansible```. Additionally, learned how to leverage serverless functions to allow for event-driven automation of your workflow.
