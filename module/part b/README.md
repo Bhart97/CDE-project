@@ -31,11 +31,13 @@ Roles:
 
 In this module, students will be working within the OCP private cloud network on ```Amazon Web Services``` and provision resources required for a web hosting service. A secured connection will be required to access the resources on the private network via the provided VPN.
 
-Outlined below are learning paths: the ```basic track``` and ```intermediate track```. The basic track serves as an introductory material for beginners and as warm-up for those familiar with cloud concepts. The intermediate track is a better representation of what is expected from entry-level cloud practitioners and will introduce new concepts and challenges.
+Outlined below are learning paths: the ```basic track``` and ```intermediate track```. The basic track serves as an introductory material for beginners and as warm-up for those familiar with cloud concepts. The intermediate track is a better representation of what is expected from entry-level cloud practitioners and will introduce new concepts and challenges. If you plan on skipping ahead to the intermediate track, please review the basic track which covers some administrative details.
 
-## Working on the Cloud: Console
+## Working on the Cloud: Console (Basic)
 
-This learning path focuses on utilizing the AWS console to create cloud resources. Each student will be provisioning their own elastic compute (EC2) instances and the required packages as well as managing objects in the simple storage service (S3). References will be provided to help resolve any troubleshooting issues that may occur. Those who are more familiar with cloud concepts are recommended to use the [AWS CLI](https://aws.amazon.com/cli/) for provisioning and managing resources.
+This learning path focuses on utilizing the AWS console to create cloud resources. Each student will be provisioning their own elastic compute (EC2) instances and the required packages as well as managing objects in the simple storage service (S3). References will be provided to help resolve any troubleshooting issues that may occur but are encouraged to explore and make mistakes.
+
+Those who are more familiar with cloud concepts are suggested to use the [AWS CloudShell](https://aws.amazon.com/cloudshell/) for provisioning and managing resources. Note, you will also being using the [AWS CLI](https://aws.amazon.com/cli/) so it is recommended to become familiar with the AWS tools.
 
 **1. Creating and Configuring a Compute Instance**
 
@@ -50,41 +52,51 @@ Create an EC2 instance following configurations listed below and default setting
 Verify the connection via SSH protocol and then install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) on the EC2. This will give permission for your EC2 instance to access AWS tools.
 
 Troubleshooting:
-- You cannot SSH from your local machine to a private network without a VPN connection.
+- You can name your compute instances to make them much easier to manage.
+- You cannot SSH from your local machine to a private network without a VPN connection (ignore if not using VPN connection).
 - If the keypair does not authenticate, make sure to specify the entire path such as ```~/.ssh/<private_key>```.
 
 **2. Connecting to Object Storage**
-Once you have installed AWS CLI onto your EC2, you will be transferring objects with the designated S3 bucket. Review the documentations on using the [s3 commands](https://docs.aws.amazon.com/cli/latest/reference/s3/) to move files within the S3 bucket.
+
+Within the S3 bucket called <TODO>, all objects will be stored under your cohort directory. You will be using the AWS CLI from within the EC2 instance to make calls to the S3 bucket. Review the documentations on using the [s3 commands](https://docs.aws.amazon.com/cli/latest/reference/s3/) to move files within the S3 bucket.
 
 Go to the EC2 console and ```Actions > Security > Modify IAM role``` and attach the role to enable EC2 access with S3, then create a new file called <firstname_lastname>.txt from your EC2 instance. You will upload this file to your bucket and it should contain the following text:
 ```
 Hello, my name is <first name> <last name>!
 ```
 
-Verify through the console that the S3 bucket now contains a file called <firstname_lastname>.txt with the appropriate text content. Upload your HTML file from the previous module and then download it onto your EC2. Verify that the contents are the same.
+Verify through the console that the S3 bucket now contains a file called <firstname_lastname>.txt with the appropriate text content. Upload your HTML file from the previous module either through the CloudShell or Console, then download it onto your EC2. Verify that the contents are the same.
 
 Troubleshooting:
-- Be careful on how you specify the path for bucket storage.
+- If the cohort directory has not been created, create one or contact the administrators.
+- Be careful on how you specify the path for bucket storage ```S3://<bucket_name>/<dir>/object```.
 - EC2 instances cannot connect to S3 services without the AWS CLI installed and the instance role attached.
 
 **3. Configure Web Server**
-Carefully follow the instructions to install an [Apache HTTP web server](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateWebServer.html) and stop once you have set the files permission for the Apache web server. Download your HTML file from the S3 bucket onto your EC2 at ```/var/www/html/<file>.html```.
+
+Carefully follow the instructions to install an [Apache HTTP web server](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateWebServer.html) and stop once you have set the files permission for the Apache web server. Either move or re-download your HTML file within your EC2 to the destination ```/var/www/html/<file>.html```.
 
 Verify that your web server is currently hosting the correct page.
 
 Troubleshooting:
-- You are required to update the permissions within the VM in order to make changes to the contents under the ```var/``` directory.
-- You can access your web page by addressing to the private IP address with any browser with ```http://<ip_address>```
+- You are required to update the permissions within the EC2 in order to make changes to the contents under the ```var/``` directory.
+- You can access your web page from the browser using the IP address ```http://<ip_address>```.
 
 **4. Load Balancer**
 
-Review the documentations about the [ELB](https://aws.amazon.com/elasticloadbalancing/). While having a single load balancer to manage your backend servers is reasonable, for practicing purposes, each student will implement their own ELB. Create a target group which contains everyone's web servers and verify that the traffic is being distributed.
+Review the documentations about the [ELB](https://aws.amazon.com/elasticloadbalancing/). Create a target group and select all the web servers that are currently available (you can always update the target group). Verify that the traffic to your backend web servers are being distributed.
 
 Troubleshooting:
 - Connecting to your ELB is similar to connecting to your EC2 from a web browser.
 - If a page reload does not update the contents of the web page, clear your cache to resolve this since AWS caches DNS queries.
 
-## Working on the Cloud: Automation
+**5. End of the Basic Track**
+
+By the end of this learning, you will have successfully provisioned a compute resource and managed objects with the S3 bucket, connect and install software packages on your EC2 instances, and created an ELB to distribute traffic across your backend web servers.
+
+**REQUIRED:** _Terminate_ all compute resources that you have created: EC2 instances and ELB.
+
+## Working on the Cloud: Automation (Intermediate)
 
 This learning path will similarly create web hosting servers but with more emphasis on resource and configuration management to achieve automation. Students will be responsible for managing more than one resource at a time and all previously created resources should be terminated to have a more manageable work environment.
 
@@ -105,7 +117,7 @@ You will be creating multiple web servers and a control node which will be detai
 
 Verify that you can reach each EC2 instance through a SSH connection.
 
-TODO: current assigns a public IP address in the template. (do not give the public subnet routing to the internet gateway)
+WARNING: currently assigns to a public IP address in the template
 
 Troubleshoot:
 - Common errors can occur due to syntax mistakes.
@@ -170,8 +182,6 @@ Troubleshooting:
 - Make sure that the address starts with http:// to reach your HTTP web server.
 - TODO: use a known working load balancer and update the target group to yours to see if the issues lies with the ELB from the template.
 
-## End of Module
-
-By the end of this module, through either learning paths, you will have successfully provision compute resources and connect with Object storage, connect and install software packages on your EC2 instances, and create an ELB to distribute traffic across your backend web server.
+**5. End of the Intermediate Track**
 
 In the intermediate track, you will have automated your work through the resource manager ```CloudFormation``` and configuration manager ```Ansible```. Additionally, learned how to leverage serverless functions to allow for event-driven automation of your workflow.

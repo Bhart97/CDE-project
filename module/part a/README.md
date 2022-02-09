@@ -11,7 +11,7 @@
 - Text editor
 - Linux terminal
 ```
-
+TODO: key fingerprint
 Note: 
 - You are not required to have an IDE for programming, but [Visual Studio Code](https://code.visualstudio.com/) is a beginner-friendly, lightweight text editor that is IDE-like when given the appropriate plugins.
 - For Windows OS, it is strongly recommended to have [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install) with your preferred Linux distribution installed or alternatively download [Git Bash](https://git-scm.com/) which provides limited command tools.
@@ -26,7 +26,7 @@ The majority of this module can be completed through Linux. Please refer to this
 
 Login / create an account. [GitHub](https://docs.github.com/en/get-started/quickstart/hello-world) offers a cloud-based solution to version control and software development. This service allows you to upload your projects to remote repositories as well as streamlining collaboration with others.
 
-Before you can start editing and saving the changes to your project, you will need to authenticate your local machine and associate it with your GitHub account. Open your Linux terminal / Git Bash and modify the following command which will create a SSH key using the RSA algorithm:
+Before you can start editing and saving the changes to your project, you will need to authenticate your local machine and associate it with your GitHub account. Open your Linux terminal / Git Bash and modify the following command which will create a [SSH key](https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key) using the RSA algorithm:
 ```
 ssh-keygen -t rsa -b 4096 -C <your_email@example.com>
 ```
@@ -38,6 +38,7 @@ settings > SSH and GPG keys > New SSH key
 
 Troubleshooting:
 - For more information on how to setup your Git, refer to this [resource](https://docs.github.com/en/get-started/quickstart/set-up-git).
+- When the keypair is generated, the terminal will generate a key fingerpint which is the hash key to quickly identify your public key and is not the public key itself.
 - Helpful commands such as ```ls -a```, ```cd <dir>```, and ```cat <file>``` to help identify and read your public key.
 
 **2. Creating a New Repository**

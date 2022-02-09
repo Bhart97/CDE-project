@@ -10,16 +10,8 @@ CREATE TABLE cohorts (
     PRIMARY KEY (id)
 )
 
-LOAD DATA INFILE '~/ec'
-INTO TABLE table_name
-FIELDS TERMINATED BY ','
-ENCLOSED BY '"'
-LINES TERMINATED BY '/n'
-IGNORE 1 ROWS;
-
+/* TODO replace with variable */
 LOAD DATA LOCAL INFILE '/home/ec2-user/documents/delta.csv'
 INTO TABLE cohorts
 FIELDS TERMINATED BY ','
-ENCLOSED BY '"'
-LINES TERMINATED BY '/n'
-IGNORE 1 ROWS;
+LINES TERMINATED BY '\n';
