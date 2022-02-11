@@ -8,10 +8,10 @@ CREATE TABLE cohorts (
     TechnicalTrack  VARCHAR(255) NOT NULL,
     LinkedIn        VARCHAR(255),
     PRIMARY KEY (id)
-)
+);
 
 /* TODO replace with variable */
-LOAD DATA LOCAL INFILE '/home/ec2-user/documents/delta.csv'
+LOAD DATA LOCAL INFILE '/home/ec2-user/documents/master.csv'
 INTO TABLE cohorts
 FIELDS TERMINATED BY ','
-LINES TERMINATED BY '\n';
+LINES TERMINATED BY '\r';

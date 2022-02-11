@@ -174,7 +174,7 @@ Troubleshooting:
 
 [AWS Lambda](https://aws.amazon.com/lambda/) enables you to call serverless functions which will run without provisioning infrastructure. You can assign the Lambda Function as an endpoint that events and other notifications services can access. For this section, you will be creating a function that when an ```EC2 stop event``` occurs, your function will be called to delete all your provisioned resources.
 
-Using the console, create a AWS Lambda function in ```Python```. Go to the [Event Bridge](https://aws.amazon.com/eventbridge/) on the console and create a new rule with the following conditions: ```Event pattern > event matching pattern > pre-defined pattern > AWS > EC2 > state-change notification > stopped > "instance id of control node"```. This will send an event notification when your control node has been stopped.
+Using the console, create a AWS Lambda function in ```Python``` with the pre-defined role. Go to the [Event Bridge](https://aws.amazon.com/eventbridge/) on the console and create a new rule with the following conditions: ```Event pattern > event matching pattern > pre-defined pattern > AWS > EC2 > state-change notification > stopped > "instance id of control node"```. This will send an event notification when your control node has been stopped.
 
 Add the trigger to your Lambda Function and update the template code ```lambda_function.py```. This template code will allow for your Lambda Function to delete the CloudFormation stack specified. Create a test case using the event pattern from the rule created. Deploy your code and verify that _stopping_ your control node will also terminate your CloudFormation resources.
 
