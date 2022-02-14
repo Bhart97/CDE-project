@@ -6,9 +6,9 @@
 
 ## Setup
 ```
-- AWS IAM account (access key ID and secret access key)
-- OCP's virtual private cloud (VPC)
-- <Region>
+- AWS IAM account
+- <TODO> named vpc
+- <TODO> region
 ```
 
 Reminder, all permissions and access to AWS resources is denied by default. The information below details the implementations of the IAM permissions for this module.
@@ -36,9 +36,9 @@ Roles:
 
 ## Working on the Cloud
 
-In this module, students will be working within the OCP private cloud network on ```Amazon Web Services``` and provision resources required for a web hosting service. A secured connection will be required to access the resources on the private network via the provided VPN.
+In this module, students will be working within the OCP private cloud network on ```Amazon Web Services``` and provision resources required for a web hosting service. Because this is a private network, students will require a secured connection <TODO>.
 
-Outlined below are learning paths: the ```basic track``` and ```intermediate track```. The basic track serves as an introductory material for beginners and as warm-up for those familiar with cloud concepts. The intermediate track is a better representation of what is expected from entry-level cloud practitioners and will introduce new concepts and challenges. If you plan on skipping ahead to the intermediate track, please review the basic track which covers some administrative details and required set ups.
+In this module, there are two required learning paths available: the ```basic track``` and ```intermediate track```. The basic track serves as an introductory material for beginners and as warm-up for those familiar with cloud concepts. The intermediate track is a better representation of what is expected from entry-level cloud practitioners and will introduce new concepts and challenges.
 
 ## Working on the Cloud: Console (Basic)
 
@@ -48,22 +48,21 @@ Those who are more familiar with cloud concepts are suggested to use the [AWS Cl
 
 **1. Creating and Configuring a Compute Instance**
 
-Login with the provided AWS IAM account. Upload an [existing keypair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws) from your local machine if planning on using the CloudShell. Note, it is recommended to create a new dedicated keypair with an identifable key name so that it is interchangeable with your local machine and CloudShell.
+Login with the provided AWS IAM account. Upload an [existing keypair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws) from your local machine if planning on using the CloudShell. Note, managing your keypair is very important and is highly recommended to be consistent with how your keys are stored and accessed.
 
 Create an EC2 instance with the following configurations listed below and default settings otherwise. View the documentations on [initializing](https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) and [launching](https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) EC2 instances with the AWS CloudShell:
 ```
 - Amazon Linux 2 AMI with t2.micro type
-- WebServerGroup security group
+- <TODO> WebServerGroup security group 
 ```
 
 Verify the connection via SSH protocol and then install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) on the EC2. This will give permission for your EC2 instance to access AWS tools.
 
 Troubleshooting:
-- Please refer to the console to get the proper ID for the parameters if using the CloudShell.
+- Please refer to the console to get information required for the parameters if using the CloudShell.
 - You can name your compute instances to make them much easier to manage.
-- If you cannot SSH from to the remote machine, you either need to assign a public IP address or use a VPN connection for the private IP address.
 - If the keypair does not authenticate, make sure to specify the entire path such as ```~/.ssh/<private_key>```.
-- You are bound to encounter many issues involving your keypair so it is important to be consistent and renaming if necessary for clarity.
+- You cannot connect to a private network from a public network without a secured / private connection.
 
 **2. Connecting to Object Storage**
 
@@ -74,12 +73,10 @@ Go to the EC2 console and ```Actions > Security > Modify IAM role``` and attach 
 Hello, my name is <first name> <last name>!
 ```
 
-Verify through the console that the S3 bucket now contains a file called <firstname_lastname>.txt with the text content. Upload your HTML file from the previous module either through the CloudShell or console, then download it onto your EC2. Verify that the contents are the same.
+Verify through the console that the S3 bucket now contains a file called ```<firstname_lastname>.txt``` with the text content. Upload your HTML file from the previous module either through the CloudShell or console, then download it onto your EC2. Verify that the contents are the same.
 
 Troubleshooting:
-- If the cohort directory has not been created, then create one.
 - Be careful on how you specify the path for the bucket ```S3://<bucket_name>/<dir>/object```.
-- s3 commands are limited to interacting with objects and cannot modify folders.
 - EC2 instances cannot connect to S3 services without the AWS CLI installed and the instance role attached.
 
 **3. Configure Web Server**
@@ -94,9 +91,9 @@ Troubleshooting:
 
 **4. Load Balancer**
 
-Review the documentations about the [ELB](https://aws.amazon.com/elasticloadbalancing/). Create a target group and select any web servers that are currently available (adding a backend that is not currently running Apache may unexpected errors). Create the ELB with the default settings and the following configurations:
+Review the documentations about the [ELB](https://aws.amazon.com/elasticloadbalancing/). Create a target group and select any web servers that are currently available (adding a backend that is not currently running Apache may lead to unexpected errors). Create the ELB with the default settings and the following configurations:
 ```
-WebServerGroup security group
+<TODO> WebServerGroup security group
 HTTP port 80 forwarding to selected target group
 ```
 
@@ -104,7 +101,8 @@ Verify that the traffic to your backend web servers are being distributed.
 
 Troubleshooting:
 - Connecting to your ELB is similar to connecting to your EC2 from a web browser.
-- If a page reload does not update the contents of the web page, clear your cache to resolve this since AWS caches DNS queries.
+- ELB may not work properly if the web page is not running.
+- If a page reload does not update the contents of the web page, clear your cache to resolve some issues due DNS queries being cached.
 
 **5. End of the Basic Track**
 
@@ -154,7 +152,7 @@ Run ```apache.yaml``` to install the Apache HTTP web servers for your instances.
 
 Select one of the servers to be the test server. Connect via SSH and escalate your permissions with ```sudo -i```. This will grant temporary permission to modify ```/var/www/```. Create an empty HTML file and have it contain any desired text. You will not require a HTML skeleton for testing purposes. Verify that the page now reflects the text content.
 
-Do the same but this time download your HTML file through any means to the other web server. Verify that the page now reflects your HTML.
+Repeat but this time download your HTML file through any means to the other web server. Verify that the page now reflects your HTML.
 
 Troubleshooting:
 - Basic VIM commands: press ```insert``` to make changes, ```:w``` to write, ```:q``` to exit.

@@ -1,12 +1,12 @@
 ## Project name: CDE Project
 
-**Introduction**: This project was created to provide additional hands-on experience for the cloud engineering technical track in Optimum Hit CareerPath (OCP) program. The objectives are to increase exposure to the basics of programming and software deployment using cloud technology.
+**Introduction:** The CDE project's main purpose is to provide additional technical training for the cloud engineering and related tracks for OptimumHIT CareerPath (OCP) training program. However, it is also designed to be a shared respostiory where students can contribute additional content or showcase what they have been learning. Here, students will be able to create resources that can be used by future cohort members.
 
-**Description**: Students will demostrate their understanding of these core components: identity and access management, computing services, networking, and security. By the end of this project, students should have a better understanding of programming tools and will be able to host a web server on the cloud.
+**Description:** The project's objectives is to help introduce students to the popular tools used for software development and how operations are performed in the cloud. Students will be using programming tools to create a basic website and deploy it within the cloud. By doing so, they will become more familiar with software development along with the core components of cloud computing including: identity and access management, computing and storage resources, networking, and security.
 
-**Constraints**: Completing the project will require basic knowledge from the technical track (Linux command line, Python, cloud computing) and will be using AWS cloud technology. Additional changes to project scope is dependent on the student's technical skills and knowledge to explore other topics.
+**Constraints:** Basic knowledge gained from the technical track is required (Linux CLI, Python, and cloud concepts). Students who have more technical experiences are encouraged to take advantage of the provided resources and contribute to the development of this ongoing project.
 
-**Goals**: 
+**Goals:** 
 - Create and work with software development and automation tools.
 - Configure IAM and access control.
 - Launch compute resources.
@@ -14,11 +14,7 @@
 - Host and connect to a web application from a public IP address.
 - Analyze application metrics and calculate the cost for running on the cloud.
 
-**Milestones:**
-- Module A - Create a program and leverage automation.
-- Module B - Successfully host a web server on the cloud.
+**Modules:**
+- Module A - Introduction to software development.
+- Module B - Introduction to cloud operations.
 - Module C - Maintaining and modifying existing resources.
-
-**Deliverables:**
-- Successful implementation of a web server with traffic distribution using a load balancer.
-- Update and maintain the main web server and database that details OCP's cohort information.

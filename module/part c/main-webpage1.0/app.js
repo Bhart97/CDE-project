@@ -1,3 +1,6 @@
+/**
+ * Creates a NodeJS server using ExpressJS to host the web page.
+ */
 const express = require('express')
 const app = express()
 const port = 3000
@@ -15,12 +18,11 @@ app.listen(port, () => {
 })
 
 /**
- * Performs SQL queries.
- * "/creates" receives a GET request and returns "SELECT * FROM table"
- * "/search" receives a GET request and returns based on given parameters
+ * GET Requests to perform SQL queries
  */
 var mysql = require("./dbcon.js");
 
+// SQL query that does a general search
 app.get("/cohorts", function(req, res, next) {
     mysql.connection.query("SELECT DISTINCt cohort FROM cohorts ORDER BY cohort", function(err, rows, fields) {
         if (err) {
@@ -43,11 +45,12 @@ app.get("/create", function(req, res, next) {
     });
 });
 
+// SQL query that accepts GET request containing: list of cohorts, what column to order by, and sort order
 app.get("/search", function(req, res, next) {
-    if (req.query.cohorts.length == 0) {
-        req.query.cohorts = "NULL";
-    }
-    mysql.connection.query("SELECT * FROM cohorts WHERE cohorts IN ?, ORDER BY ? ?", [req.query.cohorts, req.query.order, req.query.sort], function(err, rows, fields) {
+    // typical SQL queries can use "?" placeholders (e.g., SELECT ? FROM cohorts, [req.query.col, ...]) to prevent SQL injections
+    // but unknown interaction with "req.query.cohorts" causes error and failure to execute query
+    mysql.connection.query("SELECT * FROM cohorts WHERE cohort IN " + req.query.cohorts + " ORDER BY " + req.query.order + " " + req.query.sort, 
+    function(err, rows, fields) {
         if (err) {
             next(err);
             return;

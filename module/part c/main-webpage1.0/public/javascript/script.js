@@ -1,9 +1,16 @@
+// executes when the page loads
 window.onload = function () {
     displayOptions();
     createTable();
 }
 
 var listOfCohorts = [];
+var stateName = "";         // name of current column
+var stateSort = "";         // sort order of current column
+
+/**
+ * Performs SQL query to get a list of cohort.
+ */
 function displayOptions() {
     var req = new XMLHttpRequest();
     req.open("GET", "/cohorts", true);
@@ -16,15 +23,14 @@ function displayOptions() {
                 listOfCohorts[i] = row["cohort"];
             }
         }
-        generateOptions(); // because of async, this function needs to wait for the list of cohort to be generated first
+        // async means that this function should be called after response
+        generateOptions();
     });
-    req.send(null);
+    req.send();
 }
 
 /**
- * Generates the checkbox options and search button based
- * on the list of cohorts above. The list should be updated when the
- * database has been updated with additional cohorts.
+ * Generates the checkbox options and search button
  */
 function generateOptions() {
     let options = document.getElementById("cohort-options");
@@ -55,14 +61,34 @@ function generateOptions() {
     button.innerHTML = "search";
     button.style.marginLeft = "10px";
     button.addEventListener("click", updateTable);
-
     options.append(button);
 }
 
+
 /**
- * Creates the table with no specific parameter.
+ * Returns the String version of the selected cohorts.
+ * 
+ * @returns String
+ */
+function selectedOptions() {
+    let checkbox = document.getElementsByClassName("cohort-checkbox");
+    let checked = "("
+    for (let i = 0; i < checkbox.length; i++) {
+        let option = checkbox[i];
+        if (option.checked) {
+            checked += "'" + option.value + "', "
+        }
+    }
+    if (checked == "(") {
+        return "(NULL)";
+    }
+    return checked.slice(0, -2) + ")";
+}
+
+/**
+ * Creates the table with its headers.
  **/
- function createTable() {
+function createTable() {
     let div = document.getElementById("main-table");
     let table = document.createElement("table");
     let thead = document.createElement("thead");
@@ -111,10 +137,11 @@ function generateOptions() {
     });
     req.send();
 }
-
 /**
- * Receives the updated table and creates the table body.
- */ 
+ * The main method of updating the table body based on the received query-set.
+ * 
+ * @param {Object array} data 
+ */
 function createBody(data) {
     // clears the current table
     let div = document.getElementById("main-table");
@@ -153,55 +180,73 @@ function createBody(data) {
  * Sorts the table based on the selected column by performing a SQL query.
  */ 
 function sortTable() {
+    let inner = event.target.firstChild.nextSibling;
+    let value = event.target.firstChild.data;           // column name
+    let state = inner.classList[0];                     // column state [none, desc, asc]
+
+    stateName = value;
+    stateSort = state;
+
+    // clears all arrows so that only one arrow is displayed at a time
+    let arrows = document.getElementsByClassName("arrow");
+    for (let i = 0; i < arrows.length; i++) {
+        arrows[i].firstChild.nextSibling.classList.replace("down-arrow", "none");
+        arrows[i].firstChild.nextSibling.classList.replace("up-arrow", "none");
+    }
+
+    let params = "?" + "cohorts=" + selectedOptions();
+    params += `&order=${value}&sort=`;
+    switch(state) {
+        case "none":
+            inner.classList.replace("none", "up-arrow");
+            params += "ASC";
+            break;
+        case "down-arrow":
+            inner.classList.replace("none", "up-arrow");
+            params += "ASC";
+            break;
+        case "up-arrow":
+            inner.classList.replace("none", "down-arrow");
+            params += "DESC";
+            break;
+    }
+
     var req = new XMLHttpRequest();
-    req.open("GET", "/search", true);
+    req.open("GET", "/search" + params, true);
     req.setRequestHeader("Content-Type", "application-json");
     req.addEventListener("load", function() {
         if (req.status >= 200 && req.status < 400) {
-            let inner = event.target.firstChild.nextSibling;
-            let value = event.target.firstChild.data;           // column name
-            let state = inner.classList[0];                     // column state [none, desc, asc]
-
-            // clears all arrows so that only one arrow is displayed at a time
-            arrows = document.getElementsByClassName("arrow");
-            for (let i = 0; i < arrows.length; i++) {
-                arrows[i].firstChild.nextSibling.classList.replace("down-arrow", "none");
-                arrows[i].firstChild.nextSibling.classList.replace("up-arrow", "none");
-            }
-
-            // updates the sorting arrows and begins building parameters
-            let params = [];
-            params.append(value);
-            switch(state) {
-                case "none":
-                    inner.classList.replace("none", "up-arrow");
-                    params[0] = params[0] + " ASC";
-                    break;
-                case "down-arrow":
-                    inner.classList.replace("none", "up-arrow");
-                    params[0] = params[0] + " ASC";
-                    break;
-                case "up-arrow":
-                    inner.classList.replace("none", "down-arrow");
-                    params[0] = params[0] + " DESC";
-                    break;
-            }
-            
-            // sends the parameters and updates the table
-            let data = db.updateTable(params);
-            let table = document.getElementById("main-table");
-            let tbody = table.children[1];
-            tbody.innerHTML = "";
-            for (let i = 0; i < data.length; i++) {
-                let row = data[i];
-                tbody = document.append(createRow(row));
-            }
+            let response = JSON.parse(req.responseText);
+            createBody(response);
         }
-        req.send(null);
     });
+    req.send();
 }
 
-//TODO: search function based on the check boxes AND arrow state, sort function
+/**
+ * Updates the table if the search button was pressed.
+ */
 function updateTable() {
+    let params = "?" + "cohorts=" + selectedOptions();
+    params += `&order=${stateName}&sort=`;
+    switch (stateSort) {
+        case "none":
+            params += "ASC";
+            break;
+        case "down-arrow":
+            params += "ASC";
+        case "up-arrow":
+            params += "DESC";
+    }
 
+    var req = new XMLHttpRequest();
+    req.open("GET", "/search" + params, true);
+    req.setRequestHeader("Content-Type", "application-json");
+    req.addEventListener("load", function() {
+        if (req.status >= 200 && req.status < 400) {
+            let response = JSON.parse(req.responseText);
+            createBody(response);
+        }
+    });
+    req.send();
 }

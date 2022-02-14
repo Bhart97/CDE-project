@@ -1,3 +1,5 @@
+/* Creates the OCP SQL database */
+
 CREATE DATABASE OCP;
 
 CREATE TABLE cohorts (
@@ -11,7 +13,9 @@ CREATE TABLE cohorts (
 );
 
 /* TODO replace with variable */
-LOAD DATA LOCAL INFILE '/home/ec2-user/documents/master.csv'
+DECLARE @dir AS VARCHAR(255)
+SELECT @dir = ''
+LOAD DATA INFILE @dir
 INTO TABLE cohorts
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r';
