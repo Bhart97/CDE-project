@@ -31,12 +31,12 @@ Policies:
 
 Roles:
 - EC2 instances are given permission to communicate with S3 services.
-- Lambda Functions are given permission delete EC2 resources and CloudFormation stacks.
+- Lambda Functions are given permission to delete EC2 resources and CloudFormation stacks.
 ```
 
 ## Working on the Cloud
 
-In this module, students will be working within the OCP private cloud network on ```Amazon Web Services``` and provision resources required for a web hosting service. Because this is a private network, students will require a secured connection <TODO>.
+In this module, students will be working within the OCP private cloud network on ```Amazon Web Services``` and provision resources required for a web hosting service. Because this is a private network, students will require a secured connection ```<TODO>```.
 
 In this module, there are two required learning paths available: the ```basic track``` and ```intermediate track```. The basic track serves as an introductory material for beginners and as warm-up for those familiar with cloud concepts. The intermediate track is a better representation of what is expected from entry-level cloud practitioners and will introduce new concepts and challenges.
 
@@ -48,9 +48,9 @@ Those who are more familiar with cloud concepts are suggested to use the [AWS Cl
 
 **1. Creating and Configuring a Compute Instance**
 
-Login with the provided AWS IAM account. Upload an [existing keypair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws) from your local machine if planning on using the CloudShell. Note, managing your keypair is very important and is highly recommended to be consistent with how your keys are stored and accessed.
+Login with the provided AWS IAM account. Upload an [existing keypair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws) or create a new one. Note, managing your keypair is very important and is highly recommended to be consistent with how your keys are stored and accessed.
 
-Create an EC2 instance with the following configurations listed below and default settings otherwise. View the documentations on [initializing](https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) and [launching](https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) EC2 instances with the AWS CloudShell:
+Create an EC2 instance with the following configurations listed below and default settings otherwise. View the documentations on initializing and launching [EC2 instances](https://docs.aws.amazon.com/cli/latest/userguide/cli-services-ec2-instances.html) with the AWS CloudShell:
 ```
 - Amazon Linux 2 AMI with t2.micro type
 - <TODO> WebServerGroup security group 
@@ -66,7 +66,7 @@ Troubleshooting:
 
 **2. Connecting to Object Storage**
 
-Within the S3 bucket called <TODO>, all objects will be stored under your cohort directory with your name such as ```s3://<bucket_name>/<cohort>/```. You will be using the AWS CLI from within the EC2 instance to make calls to the S3 bucket. Review the documentations on using the [s3 commands](https://docs.aws.amazon.com/cli/latest/reference/s3/) to move files within the S3 bucket.
+Within the S3 bucket called ```<TODO>```, all objects will be stored under your cohort directory with your name such as ```s3://<bucket_name>/<cohort>/```. You will be using the AWS CLI from within the EC2 instance to make calls to the S3 bucket. Review the documentations on using the [s3 commands](https://docs.aws.amazon.com/cli/latest/reference/s3/) to move files within the S3 bucket.
 
 Go to the EC2 console and ```Actions > Security > Modify IAM role``` and attach the role to enable EC2 access with S3, then create a new file called <firstname_lastname>.txt from your EC2 instance. You will upload this file under the appropriate directory and it should contain the following text:
 ```
@@ -120,7 +120,7 @@ This learning path will similarly create web hosting servers but with more empha
 
 [CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) provides an Infrastructure-as-Code solution by provisioning and managing resources written with a JSON / YAML template. When a template is created and read by CloudFormation, a stack is generated which is a collection of the AWS resources managed as a single unit. Thus, you can modify several resources at once by modifying the stack.
 
-Examine ```server.json``` which provides an example template for creating EC2 instances with the given parameters. There are several ```TODO``` which denotes a missing value and update them with the appropriate value. Please refer to the CloudFormation guidelines on getting started and learning more about how format a template.
+Examine ```server.json``` which provides an example template for creating EC2 instances with the given parameters. There are several ```TODO``` which denotes a missing value and update them with the appropriate value. Please refer to the CloudFormation guidelines on getting started and learning more about how to format a template.
 
 You will be creating multiple web servers and a control node which will be detailed in the next section. Update the ```server.json``` file to create the following resources below. Access CloudFormation from the console and upload the template to create a stack and choose all default settings.
 ```
