@@ -17,14 +17,12 @@ app.listen(port, () => {
     console.log(`Listening on port ${port}`)
 })
 
-/**
- * GET Requests to perform SQL queries
- */
+// enables connection to database
 var mysql = require("./dbcon.js");
 
-// SQL query that does a general search
+// SQL query that returns the distinct cohorts
 app.get("/cohorts", function(req, res, next) {
-    mysql.connection.query("SELECT DISTINCt cohort FROM cohorts ORDER BY cohort", function(err, rows, fields) {
+    mysql.connection.query("SELECT DISTINCT cohort FROM cohorts ORDER BY cohort", function(err, rows, fields) {
         if (err) {
             next(err);
             return;
@@ -34,6 +32,7 @@ app.get("/cohorts", function(req, res, next) {
     });
 });
 
+// SQL query that does a general search
 app.get("/create", function(req, res, next) {
     mysql.connection.query("SELECT * FROM cohorts", function(err, rows, fields) {
         if (err) {

@@ -64,7 +64,7 @@ Troubleshooting:
 
 **2. Connecting to Object Storage**
 
-Within the S3 bucket called ```<TODO>```, all objects will be stored under your cohort directory with your name such as ```s3://<bucket_name>/<cohort>/```. You will be using the AWS CLI from within the EC2 instance to make calls to the S3 bucket. Review the documentations on using the [s3 commands](https://docs.aws.amazon.com/cli/latest/reference/s3/) to move files within the S3 bucket.
+Within the S3 bucket called ```<TODO>```, all objects will be stored under your cohort directory. You will be using the AWS CLI from within the EC2 instance to make calls to the S3 bucket. Review the documentations on using the [s3 commands](https://docs.aws.amazon.com/cli/latest/reference/s3/) to move files within the S3 bucket.
 
 Go to the EC2 console and ```Actions > Security > Modify IAM role``` and attach the role to enable EC2 access with S3, then create a new file called <firstname_lastname>.txt from your EC2 instance. You will upload this file under the appropriate directory and it should contain the following text:
 ```
@@ -182,4 +182,4 @@ Troubleshooting:
 
 **REQUIRED:** _Terminate_ any remaining provisioned resources such as the serverless function and event rule.
 
-By the end of this learning, you will have automated your work through the resource manager ```CloudFormation``` to provision resources and configuration manager ```Ansible``` to deploy software packages. Finally, you have created an event rule to trigger a serverless function and allow for event-driven automation of your work.
+By the end of this learning, you will have automated your work through the resource manager ```CloudFormation``` to manage several resources as a single unit and configuration manager ```Ansible``` to deploy software packages across multiple hosts. Finally, you have created an event rule to trigger a serverless function that allows for event-driven processes.
