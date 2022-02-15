@@ -1,4 +1,4 @@
-## Module A: Objectives
+## Module A: Introduction to Software Development
 
 - Explore and understand how GitHub works.
 - Save changes from local repository to the remote repository.

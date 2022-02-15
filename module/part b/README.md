@@ -1,4 +1,4 @@
-## Module B: Objectives
+## Module B: Introduction to Cloud Operations
 
 - Create and connect to computer instances.
 - Upload and download with Object storage.
@@ -27,8 +27,6 @@ Policies:
 - Group is given permission to manage AWS Lambda Functions.
 - Group is given permission to manage Event Bridge.
 
-- Group is given permission to manage Amazon RDS.
-
 Roles:
 - EC2 instances are given permission to communicate with S3 services.
 - Lambda Functions are given permission to delete EC2 resources and CloudFormation stacks.
@@ -36,7 +34,7 @@ Roles:
 
 ## Working on the Cloud
 
-In this module, students will be working within the OCP private cloud network on ```Amazon Web Services``` and provision resources required for a web hosting service. Because this is a private network, students will require a secured connection ```<TODO>```.
+In this module, students will be working within the OCP private cloud network on ```Amazon Web Services``` and provision resources required for a web hosting service. Because this is a private network, students will require a secured connection through ```<TODO>```.
 
 In this module, there are two required learning paths available: the ```basic track``` and ```intermediate track```. The basic track serves as an introductory material for beginners and as warm-up for those familiar with cloud concepts. The intermediate track is a better representation of what is expected from entry-level cloud practitioners and will introduce new concepts and challenges.
 

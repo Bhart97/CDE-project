@@ -8,11 +8,9 @@
 
 **Goals:** 
 - Create and work with software development and automation tools.
-- Configure IAM and access control.
-- Launch compute resources.
-- Manage a network and its resources.
-- Host and connect to a web application from a public IP address.
-- Analyze application metrics and calculate the cost for running on the cloud.
+- Understand how IAM allows and restricts access.
+- Launch and manage cloud resources.
+- Become familiar with how cloud resources are managed at scale.
 
 **Modules:**
 - Module A - Introduction to software development.

@@ -1,39 +1,34 @@
-## Module C: Objectives
+## Module C: Maintaining and Modifying Existing Resources
 
-## Setup
+After completing the previous tool modules, you are now equipped with the basic knowledge to start exploring additional topics. The only work required for this module is to simply update the existing database by adding information about your cohort into the database. Depending on whether the database is a relational database or a NoSQL database will determine how to format the data.
+
 ```
-db EC2 instance, access to s3 and db
-AWS RDS
+Database schema:
+Database = OCP
+Table = Cohorts
+
+SQL database:
+<first name>, <last name>, <cohort>, <tech track>, <profile>
+
+NoSQL database:
+{
+    "FirstName"  : <first name>,
+    "LastName"   : <last name>,
+    "Cohort"     : <cohort>,
+    "tech track" : <tech track>,
+    "profile"    : <profile>
+}
 ```
 
-Policies
+## Updating the Website
 
-## Connecting to RDS
-- Connect to the EC2 instance running MySQL or create one
-```
-mysql -h practice-db-erict98.cyiqr4kslqic.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
-```
-Requires properly configured security group (access to port 3306 on the db), permission for RDS to connect with s3
+(2/14/2022) The webpage is currently running on NodeJS and using the Express framework to make GET requests to the database.
 
-Use lambda function to read data from s3 bucket and update the db
-make sure csv is formatted properly
+To launch the website, the software packages ```nodejs``` and ```npm``` must be installed on the server. After the installation, the root directory of the webpage should contain both ```app.js``` and ```package-lock.json```. The JavaScript file creates the server and processes HTTP requests while the JSON file lists the dependencies required to run the webpage properly. Run the command ```npm ci``` which will create the dependencies ```node_modules``` described within ```package-lock.json```.
 
-connection ec2 ->
-```
-curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
-sudo yum install nodejs
-npm install express
-npm install mysql
-```
-install node.js, npm install express, mysql
+Should the webpage require a clean installation, install ```nodejs``` and ```npm``` on the server and run ```npm init``` to create the default ```node_modules```. Then run ```npm install express``` and ```npm install mysql```.
 
-// authenticate the website
-// take snapshot and save as AMI and export database
-// give website over
+You can simply launch the webpage through ```node app.js``` and can be modified such that the [server can be ran until the instance shuts down](https://www.npmjs.com/package/forever).
 
-
-runtime
-part a: ~1 hour
-part b (basic) ~1 hour
-part b (intermediate) ~2 hour
-
+## Moving Forward
+For this repository, students are encouraged to further their understanding of software management tools such as [branching](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches) so that can start their until projects and showcase what they have been learning. There is a roadmap that details some of unimplemented features and suggestions of where to get started.

@@ -1,6 +1,0 @@
-ROADMAP:
-[ ] DynamoDB and conversion to NoSQL
-[ ] API gateway and additional Lambda FunctionsSlackBot and app within slack that calls API gateway and sends to lambda and responds back (chat box)
-[ ] Conversion of JavaScript to Python Django framework
-[ ] Networking and VPN connection / peering
-[ ] More Linux CLI and automation skills / IaC
