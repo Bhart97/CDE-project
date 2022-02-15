@@ -5,8 +5,8 @@ window.onload = function () {
 }
 
 var listOfCohorts = [];
-var stateName = "";         // name of current column
-var stateSort = "";         // sort order of current column
+var stateName = "id";               // name of current column (default is the id column)
+var stateSort = "none";       // sort order of current column (default is asc)
 
 /**
  * Performs SQL query to get a list of cohort.
@@ -184,9 +184,6 @@ function sortTable() {
     let value = event.target.firstChild.data;           // column name
     let state = inner.classList[0];                     // column state [none, desc, asc]
 
-    stateName = value;
-    stateSort = state;
-
     // clears all arrows so that only one arrow is displayed at a time
     let arrows = document.getElementsByClassName("arrow");
     for (let i = 0; i < arrows.length; i++) {
@@ -211,6 +208,9 @@ function sortTable() {
             break;
     }
 
+    stateName = value;
+    stateSort = inner.classList[0];
+
     var req = new XMLHttpRequest();
     req.open("GET", "/search" + params, true);
     req.setRequestHeader("Content-Type", "application-json");
@@ -233,10 +233,12 @@ function updateTable() {
         case "none":
             params += "ASC";
             break;
-        case "down-arrow":
-            params += "ASC";
         case "up-arrow":
+            params += "ASC";
+            break;
+        case "down-arrow":
             params += "DESC";
+            break;
     }
 
     var req = new XMLHttpRequest();

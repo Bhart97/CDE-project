@@ -48,6 +48,7 @@ app.get("/create", function(req, res, next) {
 app.get("/search", function(req, res, next) {
     // typical SQL queries can use "?" placeholders (e.g., SELECT ? FROM cohorts, [req.query.col, ...]) to prevent SQL injections
     // but unknown interaction with "req.query.cohorts" causes error and failure to execute query
+    console.log("SELECT * FROM cohorts WHERE cohort IN " + req.query.cohorts + " ORDER BY " + req.query.order + " " + req.query.sort)
     mysql.connection.query("SELECT * FROM cohorts WHERE cohort IN " + req.query.cohorts + " ORDER BY " + req.query.order + " " + req.query.sort, 
     function(err, rows, fields) {
         if (err) {

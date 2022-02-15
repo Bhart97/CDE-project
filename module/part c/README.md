@@ -35,7 +35,7 @@ To launch the website, the software packages ```nodejs``` and ```npm``` must be 
 
 Should the webpage require a clean installation, install ```nodejs``` and ```npm``` on the server and run ```npm init``` to create the default ```node_modules```. Then run ```npm install express``` and ```npm install mysql```.
 
-You can simply launch the webpage through the command ```node app.js``` and can be modified such that the [server can be ran until the instance shuts down](https://www.npmjs.com/package/forever).
+You can simply launch the webpage through the command either ```npm start``` or ```node app.js``` and can be modified such that the [server can be ran until the instance shuts down](https://www.npmjs.com/package/forever).
 
 ## Moving Forward
 
