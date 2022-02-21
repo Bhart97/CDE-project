@@ -35,7 +35,7 @@ To launch the website from a remote machine, the software packages ```nodejs``` 
 
 Should the webpage require a clean installation, install ```nodejs``` and ```npm``` on the server and run ```npm init``` to create the default ```node_modules/```. Then run ```npm install express``` and ```npm install mysql```.
 
-You can simply launch the webpage through the command either ```npm start``` or ```node app.js``` and can be modified such that the [server can be ran until the instance shuts down](https://www.npmjs.com/package/forever). You can visit the web page through <IP-ADDRESS>:<PORT-NUMBER> (e.g., 44.127.34.05:3000 where 44.127.34.05 is the public IP address and 3000 is the port number) or assign a domain name.
+You can simply launch the webpage through the command either ```npm start``` or ```node app.js``` and can be modified such that the [server can be ran until the instance shuts down](https://www.npmjs.com/package/forever). You can visit the web page through ```IP-ADDRESS : PORT-NUMBER``` (e.g., 44.127.34.05:3000 where 44.127.34.05 is the public IP address and 3000 is the port number) or assign a domain name.
 
 ## Moving Forward
 
