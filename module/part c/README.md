@@ -29,13 +29,13 @@ NoSQL database:
 
 ## Updating the Website
 
-(2/14/2022) The webpage is currently running on NodeJS and using the Express framework to make HTTP requests. Built around a MySQL database.
+(2/14/2022) The webpage is currently running on NodeJS and using the Express framework to make HTTP requests. Currently connected to a MySQL database.
 
-To launch the website, the software packages ```nodejs``` and ```npm``` must be installed on the server. After the installation, the root directory of the webpage should contain both ```app.js``` and ```package-lock.json```. The JavaScript file creates the server and processes HTTP requests while the JSON file lists the dependencies required to run the webpage properly. Run the command ```npm ci``` which will create the dependencies ```node_modules``` described within ```package-lock.json```.
+To launch the website from a remote machine, the software packages ```nodejs``` and ```npm``` must be installed on the server. After the installation, the root directory of the webpage should contain both ```app.js``` and ```package-lock.json```. The JavaScript file creates the server and processes HTTP requests while the JSON file lists the dependencies required to run the webpage properly. Run the command ```npm ci``` which will create the dependencies within ```node_modules/``` described within ```package-lock.json```.
 
-Should the webpage require a clean installation, install ```nodejs``` and ```npm``` on the server and run ```npm init``` to create the default ```node_modules```. Then run ```npm install express``` and ```npm install mysql```.
+Should the webpage require a clean installation, install ```nodejs``` and ```npm``` on the server and run ```npm init``` to create the default ```node_modules/```. Then run ```npm install express``` and ```npm install mysql```.
 
-You can simply launch the webpage through the command either ```npm start``` or ```node app.js``` and can be modified such that the [server can be ran until the instance shuts down](https://www.npmjs.com/package/forever).
+You can simply launch the webpage through the command either ```npm start``` or ```node app.js``` and can be modified such that the [server can be ran until the instance shuts down](https://www.npmjs.com/package/forever). You can visit the web page through <IP-ADDRESS>:<PORT-NUMBER> (e.g., 44.127.34.05:3000 where 44.127.34.05 is the public IP address and 3000 is the port number) or assign a domain name.
 
 ## Moving Forward
 

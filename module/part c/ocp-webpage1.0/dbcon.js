@@ -1,10 +1,10 @@
 var mysql = require("mysql");
 
 var connection = mysql.createConnection({
-  host: "practice-db-erict98.cyiqr4kslqic.us-east-1.rds.amazonaws.com",
-  user: "admin",
-  password: "password123!",
-  database: "OCP"
+  host: "",
+  user: "",
+  password: "",
+  database: ""
 });
 
 connection.connect(function(err) {
